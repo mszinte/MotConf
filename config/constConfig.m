@@ -19,11 +19,11 @@ function const = constConfig(scr, const)
 [const.seed, const.whichGen] = ClockRandSeed;
 
 % Colors
-const.white = [255, 255, 255];
+const.white = [1, 1, 1];
 const.black = [0,0,0];
-const.gray = [128,128,128];
-const.red = [200, 0, 0];
-const.green = [0, 200, 0];
+const.gray = [0.5, 0.5, 0.5];
+const.red = [0.8, 0, 0];
+const.green = [0, 0.8, 0];
 const.background_color = const.gray; 
 
 % Time parameters
@@ -149,17 +149,80 @@ const.ring_col_hsv_lst(:, 1) = const.hues2;
 const.ring_col_hsv_lst(:, 2) = 0.333; % saturation
 const.ring_col_hsv_lst(:, 3) = 0.750; % value
 const.ring_col_rgb_lst = hsv2rgb(const.ring_col_hsv_lst);
-const.ring_col_rgb_lst = const.ring_col_rgb_lst - 0.5;
-const.ring_col_rgb_lst = const.ring_col_rgb_lst.* 255;
-
-% to indicate confidence choice change fixation color to red
-const.FixationGoingRed{1}=[1 0.7 0.7];                                      % (?)
-const.FixationGoingRed{2}=[1 0.4 0.4];                                      % (?)
-const.FixationGoingRed{3}=[1 0.1 0.1];                                      % (?)
+const.ring_col_rgb_lst = const.ring_col_rgb_lst;
+const.ring_col_rgb_lst = const.ring_col_rgb_lst;
 
 const.color_wheel_rect = CenterRect([0, 0, const.frame_chosen_size_pix, ...
                                     const.frame_chosen_size_pix], ...
                                     [0, 0, scr.scr_sizeX, scr.scr_sizeY]);
+
+% Trial settings
+const.nb_repeat = 4;
+const.nb_trials = const.nb_repeat * length(const.prob_signal_lst) * ...
+    length(const.prob_signal_lst);
+
+% Compute a single gabor
+texrect = [0, 0, const.im_wdth, const.im_hght];
+                                
+const.dstRects = NaN(4, ngabors);
+const.dstRects1 = NaN(4, ngabors);
+const.dstRects2 = NaN(4, ngabors);
+const.gabor_count = 0;
+for rr = 1:const.stim_nb_rows
+    for cc = 1:const.stim_nb_rows
+        gg = cc + const.stim_nb_rows * (rr - 1);
+        xpos = scr.x_mid + (rr - (const.stim_nb_rows + 1)/2)*const.stim_row_dist_pix;
+        ypos = scr.y_mid + (cc - (const.stim_nb_rows + 1)/2)*const.stim_row_dist_pix;
+        
+        if (((xpos - scr.x_mid)^2 + ...
+                (ypos - scr.y_mid)^2 <= (const.stim_size_pix/2)^2) && ...
+                ((xpos - scr.x_mid)^2 + ...
+                (ypos - scr.y_mid)^2 >= (const.stim_inner_pix/2)^2))
+            
+            const.dstRects(:, gg) = CenterRectOnPoint(texrect, xpos, ypos)';
+               
+            % generate the windmill patterns
+            anglPoint = atan2d((ypos - scr.y_mid), ((xpos - scr.x_mid)));
+            if and(anglPoint>=anglesWINDstart(1),anglPoint<anglesWINDstart(1)+45)
+                const.dstRects1(:, gg) = CenterRectOnPoint(texrect, xpos, ypos)';
+            elseif  and(anglPoint>anglesWINDstart(2),anglPoint<=anglesWINDstart(2)+45)
+                const.dstRects1(:, gg) = CenterRectOnPoint(texrect, xpos, ypos)';
+            elseif  and(anglPoint>=anglesWINDstart(3),anglPoint<anglesWINDstart(3)+45)
+                const.dstRects1(:, gg) = CenterRectOnPoint(texrect, xpos, ypos)';
+            elseif  and(anglPoint>anglesWINDstart(4),anglPoint<=anglesWINDstart(4)+45)
+                const.dstRects1(:, gg) = CenterRectOnPoint(texrect, xpos, ypos)';
+            else
+                const.dstRects2(:, gg) = CenterRectOnPoint(texrect, xpos, ypos)';
+                const.gabor_count = const.gabor_count + 1;
+            end
+        end
+    end
+end
+
+% -> prepare windmill
+const.dstRects1 = const.dstRects1(:, ~isnan(const.dstRects1(1, :))); % windmill 1
+const.dstRects2 = const.dstRects2(:, ~isnan(const.dstRects2(1, :))); % windmill 12
+
+const.mypars = repmat([0, const.gabor_freq_cpp, const.gabor_sc, ...
+    const.gabor_contrast, const.gabor_aspectratio, 0, 0, 0]', 1, ...
+    const.gabor_count);
+
+const.gabor_speed_inc = NaN(2, const.gabor_count);                  % speed increments for the 2 intrvls
+const.evidence_lst = NaN(const.direction_nb, const.gabor_count);
+const.gabor_orient_deg = NaN(2, const.gabor_count);                 % list of orientations for 2 intvls
+const.gabor_phase_lst = NaN(2, const.gabor_count);                  % phases for the 2 intrvls
+
+% pre-allocation
+const.is_signal = NaN(1, const.gabor_count);
+const.intended_global_dir = NaN(1, const.gabor_count);
+const.issignalS = NaN(const.nb_trials, 2, const.gabor_count);
+const.intended_global_dirS = NaN(const.nb_trials, 2, const.gabor_count);
+const.gabor_orient_degS = NaN(const.nb_trials, 2, const.gabor_count);
+const.target_dir_lst_degS = NaN(const.nb_trials, 2);
+const.prob_signal_intrvlS = NaN(const.nb_trials, 2);
+const.gabor_speed_incS = NaN(const.nb_trials, 2, const.gabor_count);
+
+
 
 % define total TR numbers and scan duration
 if const.scanner

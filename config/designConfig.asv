@@ -23,7 +23,7 @@ expDes.nb_var1 = length(const.prob_signal_lst);
 % 02 = 70 %
 % 03 = 100 %
 
-% Var 2: signal probability of second interva
+% Var 2: signal probability of second interval
 expDes.twoV = (1:length(const.prob_signal_lst))';
 expDes.nb_var2 = length(const.prob_signal_lst);
 % 01 = 40 %
@@ -39,6 +39,7 @@ expDes.nb_rand1 = length(const.direction_dva_lst);
 % 04 = 315 deg
 
 % Rand 2: signal direction of second interval
+expDes.nb_trials = expDes.nb_repeat * expDes.nb_var1 * expDes.nb_var2;
 expDes.twoR = (1:length(const.direction_dva_lst))';
 expDes.nb_rand2 = length(const.direction_dva_lst);
 % 01 = 45 deg
@@ -49,7 +50,8 @@ expDes.nb_rand2 = length(const.direction_dva_lst);
 % Experimental configuration :
 expDes.nb_var = 4;
 expDes.nb_rand = 2;
-expDes.nb_repeat = const.nb_repeat;
+expDes.nb_repeat = 4;
+expDes.nb_trials = expDes.nb_repeat * expDes.nb_var1 * expDes.nb_var2;
 
 % Experimental loop
 trialMat = zeros(expDes.nb_trials,expDes.nb_var);
@@ -65,7 +67,7 @@ for rep = 1:expDes.nb_repeat
 end
 
 trialMat = trialMat(randperm(expDes.nb_trials)', :);
-for t_trial = 1:const.nb_trials
+for t_trial = 1:expDes.nb_trials
     rand_var1 = expDes.oneV(trialMat(t_trial,1), :);
     rand_var2 = expDes.twoV(trialMat(t_trial,2), :);
     

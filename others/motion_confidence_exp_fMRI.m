@@ -445,8 +445,7 @@ end
 % -> 'nonsymetric' flag set to 0 == Gabor has fixed aspect-ratio
 % -> 'backgroundColorOffset', 'disableNorm', 'contrastPreMultiplicator'
 % gabortex = CreateProceduralGabor(winPtr, im_wdth, im_hght, 0);
-gabortex = CreateProceduralGabor(winPtr, im_wdth, im_hght, 0, ...
-    [0,0,0,0], 1, 0.5);
+gabortex = CreateProceduralGabor(winPtr, im_wdth, im_hght, 0, [0,0,0,0], 1, 0.5);
 % contrastPreMultiplicator interacts with michelson contrast, if it is 1 it
 % doubles the intended contrast, the correct value is 0.5 (probably because
 % it is contrast multiplicator).
