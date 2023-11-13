@@ -52,7 +52,7 @@ expDes.nb_rand = 2;
 expDes.nb_repeat = const.nb_repeat;
 
 % Experimental loop
-trialMat = zeros(expDes.nb_trials,expDes.nb_var);
+trialMat = zeros(const.nb_trials,expDes.nb_var);
 ii = 0;
 for rep = 1:expDes.nb_repeat
     for var1 = 1:expDes.nb_var1
@@ -64,7 +64,7 @@ for rep = 1:expDes.nb_repeat
     end
 end
 
-trialMat = trialMat(randperm(expDes.nb_trials)', :);
+trialMat = trialMat(randperm(const.nb_trials)', :);
 for t_trial = 1:const.nb_trials
     rand_var1 = expDes.oneV(trialMat(t_trial,1), :);
     rand_var2 = expDes.twoV(trialMat(t_trial,2), :);

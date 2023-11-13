@@ -112,7 +112,7 @@ if const.tracker
 end
 
 % Main trial loop
-for trial = 1:expDes.nb_trials
+for trial = 1:const.nb_trials
     expDes.trial = trial;
     expDes = runTrials(scr, const, expDes, my_key);
 end
@@ -140,7 +140,7 @@ for tab = 1:size(behav_txt_head,2)
 end
 fprintf(const.behav_file_fid,'%s\n', head_line);
 
-for trial = 1:expDes.nb_trials
+for trial = 1:const.nb_trials
     trial_line = [];
     for tab = 1:size(behav_mat_res, 2)
         if tab == size(behav_mat_res, 2)

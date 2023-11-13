@@ -163,10 +163,13 @@ const.nb_trials = const.nb_repeat * length(const.prob_signal_lst) * ...
 
 % Compute a single gabor
 texrect = [0, 0, const.im_wdth, const.im_hght];
+
+% windmill
+anglesWINDstart=[-135:90:135];
                                 
-const.dstRects = NaN(4, ngabors);
-const.dstRects1 = NaN(4, ngabors);
-const.dstRects2 = NaN(4, ngabors);
+const.dstRects = NaN(4, const.ngabors);
+const.dstRects1 = NaN(4, const.ngabors);
+const.dstRects2 = NaN(4, const.ngabors);
 const.gabor_count = 0;
 for rr = 1:const.stim_nb_rows
     for cc = 1:const.stim_nb_rows
