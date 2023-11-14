@@ -31,14 +31,21 @@ const = constConfig(scr, const);
 % Experimental design
 expDes = designConfig(const);
 
+
 % Open screen window
 PsychImaging('PrepareConfiguration');
+% allow 16bits at least so that minus colors works.
+PsychImaging('AddTask', 'General', 'FloatingPoint32BitIfPossible');
+%0-1 color range
 PsychImaging('AddTask', 'General', 'NormalizedHighresColorRange');
+
 [scr.main, scr.rect] = PsychImaging('OpenWindow', scr.scr_num, ...
     const.background_color);
-%Screen('BlendFunction', scr.main, GL_ONE, GL_ONE);
-[~] = Screen('BlendFunction', scr.main, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+%[~] = Screen('BlendFunction', scr.main, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 Priority(MaxPriority(scr.main));
+
+
+Screen('BlendFunction', scr.main, GL_ONE, GL_ONE);
 
 % Initialize eye tracker
 if const.tracker
