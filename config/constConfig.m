@@ -47,7 +47,8 @@ const.ramp_fr = 3;                                                          % Du
 const.ramp_sec = const.ramp_fr*scr.frame_duration;                          % Duration of the ramp in seconds
 
 % Stim parameters
-const.ppd = vaDeg2pix(1, scr);                                              % one pixel per dva
+[const.ppd] = vaDeg2pix(1, scr); % one pixel per dva
+const.dpp = 1/const.ppd;    
 const.env_size_dva = 0.125;                                                 % Half-size of envelope (dva)
 const.env_size_pix = vaDeg2pix(const.env_size_dva, scr);                    % half-size of envelope (pix)
 
@@ -56,7 +57,7 @@ const.im_hght = 5*const.env_size_pix+1;                                     % Si
 
 const.gabor_sc = const.env_size_pix;                                        % Spatial constant of the exponential "hull"
 const.gabor_freq_cpd = 4;                                                   % Frequency of sine grating in cycle/dva
-const.gabor_freq_cpp = const.gabor_freq_cpd * const.ppd;                    % Frequency of sine grating in cycle/pix
+const.gabor_freq_cpp = const.gabor_freq_cpd * const.dpp;                    % Frequency of sine grating in cycle/pix
 const.gabor_period = 1 / const.gabor_freq_cpp;                              % Period of sine grating in pix
 const.pix2phadva = 360 / const.gabor_period;                                % (?)
 const.gabor_contrast = 0.4;                                                 % Contrast of grating (Michelson contrast)
@@ -149,7 +150,7 @@ const.ring_col_hsv_lst(:, 1) = const.hues2;
 const.ring_col_hsv_lst(:, 2) = 0.333; % saturation
 const.ring_col_hsv_lst(:, 3) = 0.750; % value
 const.ring_col_rgb_lst = hsv2rgb(const.ring_col_hsv_lst);
-const.ring_col_rgb_lst = const.ring_col_rgb_lst;
+const.ring_col_rgb_lst = const.ring_col_rgb_lst-0.5;
 const.ring_col_rgb_lst = const.ring_col_rgb_lst;
 
 const.color_wheel_rect = CenterRect([0, 0, const.frame_chosen_size_pix, ...
@@ -205,6 +206,12 @@ end
 % -> prepare windmill
 const.dstRects1 = const.dstRects1(:, ~isnan(const.dstRects1(1, :))); % windmill 1
 const.dstRects2 = const.dstRects2(:, ~isnan(const.dstRects2(1, :))); % windmill 12
+
+if size(const.dstRects2,2)==size(const.dstRects1,2)
+else
+    error('Windmill conditions should have equal numbers of Gabors, try to use different ppd')   
+end
+
 
 const.mypars = repmat([0, const.gabor_freq_cpp, const.gabor_sc, ...
     const.gabor_contrast, const.gabor_aspectratio, 0, 0, 0]', 1, ...

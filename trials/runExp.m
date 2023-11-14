@@ -112,6 +112,8 @@ if const.tracker
 end
 
 % Main trial loop
+scr.gabortex = CreateProceduralGabor(scr.main, round(const.im_wdth), round(const.im_hght), 0, ...
+    [0,0,0,0], 1, 0.5);
 for trial = 1:const.nb_trials
     expDes.trial = trial;
     expDes = runTrials(scr, const, expDes, my_key);
