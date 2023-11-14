@@ -94,5 +94,45 @@ for t_trial = 1:const.nb_trials
     % 14: confidence reaction time
     
 end
+% calculate all fixed parameters of Gabors for each Trials
+% -> randomize Gabor orientations
+expDes.gabor_orient_degS = (randi([0, 4294967295],[const.nb_trials,2, const.gabor_count]) ./ 4294967296).*180;
+% -> randomize Gabor phases
+expDes.gabor_phase_lst = (randi([0, 4294967295],[const.nb_trials,2, const.gabor_count]) ./ 4294967296).*360;
 
+
+% ========================================================================
+for tt = 1:const.nb_trials
+    target_dir_lst_deg(1)=const.direction_dva_lst (expDes.expMat(tt,7));
+    target_dir_lst_deg(2)=const.direction_dva_lst (expDes.expMat(tt,8));
+    prob_signal_intrvl(1)=const.prob_signal_lst(expDes.expMat(tt,5));
+    prob_signal_intrvl(2)=const.prob_signal_lst(expDes.expMat(tt,6));
+    
+    % -> generate stimuli for the two intervals
+    for intrvl = 1:2
+        
+        % -> generate local speed value for each Gabor
+        nb_signal = 0;
+        for gg = 1:const.gabor_count
+            gab_ori = expDes.gabor_orient_degS(tt,intrvl, gg);
+            % -> does this Gabor belong to target?
+            is_signal (gg) = (rand <= prob_signal_intrvl(intrvl));
+            
+            if (is_signal(gg))
+                nb_signal = nb_signal + 1;
+                intended_global_dir(gg) = target_dir_lst_deg(intrvl);
+            else
+                % -> if noise, assign random intended global motion direction
+                intended_global_dir(gg) = (randi([0, 4294967295]) ./ 4294967296)*360;
+            end
+            angle_diff_deg = gab_ori - intended_global_dir(gg);
+            vect_len = cos(angle_diff_deg * (pi/180));  % vector length
+            gabor_speed_inc(intrvl, gg) = const.gabor_speed_phadeg_frm  * vect_len;
+        end
+        %save the stim parameters
+        expDes.issignalS(tt,intrvl,:)=is_signal;
+        expDes.intended_global_dirS(tt,intrvl,:)=intended_global_dir;
+    end
+    expDes.gabor_speed_incS(tt,:,:)=gabor_speed_inc;
 end
+
