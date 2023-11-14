@@ -128,7 +128,7 @@ while nbf <= trial_offset
     nbf = nbf + 1;
     
     % Draw background
-    Screen('FillRect', scr.main, const.background_color);
+    Screen('FillRect', scr.main, const.background_color );
     
     % Color wheel
     drawColorWheel(scr, const)
