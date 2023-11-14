@@ -1,4 +1,4 @@
-function drawGlobalMotion(scr, const, stim_ori, stim_prob, mot_dir)
+function drawGlobalMotion(scr, const, dtst, gabor_orient, mypars)
 % ----------------------------------------------------------------------
 % drawGlobalMotion(scr, const, stim_ori, mot_prob, mot_dir)
 % ----------------------------------------------------------------------
@@ -17,4 +17,8 @@ function drawGlobalMotion(scr, const, stim_ori, stim_prob, mot_dir)
 % ----------------------------------------------------------------------
 % Function created by Martin SZINTE (martin.szinte@gmail.com)
 % ----------------------------------------------------------------------
+
+  Screen('DrawTextures', scr.main, scr.gabortex, [], dtst, gabor_orient, ...
+    [], [], [], [], kPsychDontDoRotation, mypars);
+
 end
