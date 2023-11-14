@@ -19,26 +19,7 @@ function drawBullsEye(scr, const, coordX, coordY, colorRGB, type)
 % ----------------------------------------------------------------------
 % Function created by Martin SZINTE (martin.szinte@gmail.com)
 % ----------------------------------------------------------------------
-if  const.fix_out_rim_rad*2>10
-    if strcmp(type, 'conf')
-    % full dot
-    Screen('DrawDots', scr.main, [coordX, coordY], ...
-        const.fix_out_rim_rad*2/3, colorRGB , [], 2);
-elseif strcmp(type, 'int1')
-    % one ring bull's eye
-    Screen('DrawDots', scr.main, [coordX, coordY], ...
-        const.fix_out_rim_rad*2/3, colorRGB , [], 2);
-    Screen('DrawDots',scr.main, [coordX, coordY], ...
-        const.fix_rim_rad*2/3, -colorRGB, [], 2);
-elseif strcmp(type, 'int2')
-    % two rings bull's eye
-    Screen('DrawDots', scr.main, [coordX, coordY], ...
-        const.fix_out_rim_rad*2/3, colorRGB , [], 2);
-    Screen('DrawDots',scr.main, [coordX, coordY], ...
-        const.fix_rim_rad*2/3,-colorRGB , [], 2);
-    Screen('DrawDots',scr.main, [coordX, coordY], ...
-        const.fix_rad*2/3, colorRGB, [], 2);
-else
+
 if strcmp(type, 'conf')
     % full dot
     Screen('DrawDots', scr.main, [coordX, coordY], ...
@@ -59,4 +40,4 @@ elseif strcmp(type, 'int2')
         const.fix_rad*2, colorRGB, [], 2);
 end
 end
-end
+
