@@ -12,6 +12,8 @@
 
 % TODO
 % ----
+% - see all const with question marks
+% - see ramping ?
 % - make training
 % - make fixation stimulus
 % - copy color wheel stimulus
@@ -30,7 +32,7 @@ Screen('CloseAll'); clear all; clear mex; clear functions; close all; ...
 
 % General settings
 const.expName = 'MotConf';      % experiment name
-const.expStart = 0;             % Start of a recording (0 = NO, 1 = YES)
+const.expStart = 1;             % Start of a recording (0 = NO, 1 = YES)
 const.checkTrial = 1;           % Print trial conditions (0 = NO, 1 = YES)
 const.mkVideo = 0;              % Make a video (0 = NO, 1 = YES)
 
@@ -41,7 +43,7 @@ const.scannerTest = 0;          % fake scanner trigger (0 = NO, 1 = YES)
 const.training = 0;             % training session (0 = NO, 1 = YES)
 
 % Desired screen setting
-const.desiredFD = 120;          % Desired refresh rate
+const.desiredFD = 60;          % Desired refresh rate
 const.desiredRes = [1920,1080]; % Desired resolution
 
 % Path

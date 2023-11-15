@@ -22,13 +22,14 @@ dirImage = [dirImageFile,nameImage,'.png'];
 [imageToDraw,~,alpha] = imread(dirImage);
 imageToDraw(:,:,4) = alpha;
 
-t_handle = Screen('MakeTexture',scr.main,imageToDraw);
+t_handle = Screen('MakeTexture', scr.main, imageToDraw./255);
 texrect = Screen('Rect', t_handle);
 push_button = 0;
 
-Screen('FillRect',scr.main,const.background_color);
-Screen('DrawTexture',scr.main,t_handle,texrect,[0,0,scr.scr_sizeX,scr.scr_sizeY]);
-Screen('Flip',scr.main);
+Screen('FillRect', scr.main, const.background_color);
+Screen('DrawTexture', scr.main, t_handle, texrect,...
+    [0, 0, scr.scr_sizeX, scr.scr_sizeY]);
+Screen('Flip', scr.main);
 
 t0 = GetSecs;
 tEnd = 3;
@@ -53,7 +54,8 @@ while ~push_button
     if const.scanner == 1
         input_return = [my_key.ni_session2.inputSingleScan, ...
             my_key.ni_session1.inputSingleScan];
-        if input_return(my_key.idx_button_right1) == my_key.button_press_val
+        if input_return(my_key.idx_button_right1)...
+                == my_key.button_press_val
             keyPressed = 1;
             keyCode(my_key.right1) = 1;
         end

@@ -1,6 +1,6 @@
-function drawGlobalMotion(scr, const, dtst, gabor_orient, mypars)
+function expDes = drawGlobalMotion(scr, const, expDes, mot_int, mot_nbf)
 % ----------------------------------------------------------------------
-% drawGlobalMotion(scr, const, stim_ori, mot_prob, mot_dir)
+% expDes = drawGlobalMotion(scr, const, expDes, mot_int, mot_nbf)
 % ----------------------------------------------------------------------
 % Goal of the function :
 % Draw global motion patterns
@@ -8,17 +8,36 @@ function drawGlobalMotion(scr, const, dtst, gabor_orient, mypars)
 % Input(s) :
 % scr : struct containing screen configurations
 % const : struct containing constant configurations
-% stim_ori : stimulus whole orientation
-% stim_prob : motion signal probability
-% mot_dir : motion signal direction
+% expDes : experimental structure
+% mot_int: motion interval number
+% mot_int: motion frame number
 % ----------------------------------------------------------------------
 % Output(s):
-% none
+% expDes : experimental structure
 % ----------------------------------------------------------------------
 % Function created by Martin SZINTE (martin.szinte@gmail.com)
 % ----------------------------------------------------------------------
 
-  Screen('DrawTextures', scr.main, scr.gabortex, [], dtst, gabor_orient, ...
-    [], [], [], [], kPsychDontDoRotation, mypars);
+% Define motion
+if mot_int == 1; dstRects = const.dstRects1;
+elseif mot_int == 2; dstRects = const.dstRects2;
+end
+gabor_speed = squeeze(expDes.gabor_speed_incS(expDes.trial, ...
+    mot_int, :));
+if mot_nbf == 1
+    expDes.mypars = const.mypars;
+    expDes.mypars(1, :) = squeeze(expDes.gabor_phase_lst(expDes.trial, ...
+        mot_int, :));
+else
+    expDes.mypars(1,:) = expDes.mypars(1, :) - gabor_speed';
+end
+gabor_orient = squeeze(expDes.gabor_orient_degS(expDes.trial, ...
+    mot_int, :));
+
+% Draw motion
+
+Screen('DrawTextures', scr.main, const.gabortex, [], dstRects,...
+    gabor_orient, [], [], [], [], kPsychDontDoRotation, ...
+    expDes.mypars);
 
 end

@@ -119,6 +119,8 @@ end
 
 % Trial loop
 nbf = 0;
+mot_int1_nbf = 0;
+mot_int2_nbf = 0;
 resp_int1 = 0;
 resp_int2 = 0;
 resp_conf = 0;
@@ -136,21 +138,10 @@ while nbf <= trial_offset
     % Interval 1: motion signal
     if nbf >= int1_signal_nbf_on && nbf <= int1_signal_nbf_off
         drawBullsEye(scr, const, scr.x_mid, scr.y_mid, const.red, 'int1');
-        % motion stimulus code
-        expDes.Interval=1;
-        expDes.FramNum=nbf-int1_signal_nbf_on+1;
-        expDes.gabor_speed = squeeze(expDes.gabor_speed_incS(expDes.trial,expDes.Interval, :));
-        if expDes.FramNum==1
-            expDes.mypars=const.mypars;
-            expDes.mypars(1, :) = squeeze(expDes.gabor_phase_lst(expDes.trial,expDes.Interval, :));
-        else
-            % -> Increment phase-shift of each gabor by 'inc' amount per redraw:
-            expDes.mypars(1,:) = expDes.mypars(1,:) - expDes.gabor_speed';
-        end
-        expDes.gabor_orient = squeeze(expDes.gabor_orient_degS(expDes.trial,expDes.Interval, :));
-        expDes.dstRects=const.dstRects1; %windmill1
-        drawGlobalMotion(scr, const, expDes.dstRects,  expDes.gabor_orient,  expDes.mypars)   
+        mot_int1_nbf = mot_int1_nbf + 1;
+        expDes = drawGlobalMotion(scr, const, expDes, 1, mot_int1_nbf);
     end
+    
     % Interval 1: motion direction judgment
     time2resp_int1 = 0;
     if nbf >= int1_resp_nbf_on && nbf <= int1_resp_nbf_off
@@ -166,20 +157,8 @@ while nbf <= trial_offset
     % Interval 2: motion signal
     if nbf >= int2_signal_nbf_on && nbf <= int2_signal_nbf_off
         drawBullsEye(scr, const, scr.x_mid, scr.y_mid, const.red, 'int2');
-        % motion stimulus code
-        expDes.Interval=2;
-        expDes.FramNum=nbf-int2_signal_nbf_on+1;
-        expDes.gabor_speed = squeeze(expDes.gabor_speed_incS(expDes.trial,expDes.Interval, :));
-        if expDes.FramNum==1
-            expDes.mypars=const.mypars;
-            expDes.mypars(1, :) = squeeze(expDes.gabor_phase_lst(expDes.trial,expDes.Interval, :));
-        else
-            % -> Increment phase-shift of each gabor by 'inc' amount per redraw:
-            expDes.mypars(1,:) = expDes.mypars(1,:) - expDes.gabor_speed';
-        end
-        expDes.gabor_orient = squeeze(expDes.gabor_orient_degS(expDes.trial,expDes.Interval, :));
-        expDes.dstRects=const.dstRects2; %windmill2
-        drawGlobalMotion(scr, const, expDes.dstRects,  expDes.gabor_orient,  expDes.mypars)
+        mot_int2_nbf = mot_int2_nbf + 1;
+        expDes = drawGlobalMotion(scr, const, expDes, 2, mot_int2_nbf);
     end
     
     % Interval 2: motion direction judgment

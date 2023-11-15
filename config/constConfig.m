@@ -115,18 +115,13 @@ const.frame_startAngle_lst = const.frame_startAngle_lst + const.frame_ang_eps; %
 
 const.frame_arcAngle = 90;                                                  % (?)
 const.frame_arcAngle = const.frame_arcAngle - 2 * const.frame_ang_eps;      % (?)
-
-% it extends in this diameters, it is not the centre point. Moreover, it is
-% frame_default_thick_pix is not how big it is in diagonal. So, I should
-% give litte more extra space, I should also cover the half of the gabor
-const.frame_default_size_dva = const.stim_size_dva + 3 * const.frame_default_thick_dva;         % (?)
-const.frame_default_size_pix = vaDeg2pix(const.frame_default_size_dva, scr) + const.im_wdth;    % (?)
-
-% you just want to push this back little given by how big it ill get, there
-% is two sides of the square so add total difference
-const.frame_chosen_size_pix = const.frame_default_size_pix +...
-    (const.frame_chosen_thick_pix-const.frame_default_thick_pix);
-const.outerMost = const.frame_chosen_size_pix * const.ppd;
+const.frame_default_size_dva = const.stim_size_dva + 3 * ...
+    const.frame_default_thick_dva;                                          % (?)
+const.frame_default_size_pix = vaDeg2pix(const.frame_default_size_dva, ...
+    scr) + const.im_wdth;                                                   % (?)
+const.frame_chosen_size_pix = const.frame_default_size_pix +...                
+    (const.frame_chosen_thick_pix-const.frame_default_thick_pix);           % (?)
+const.outerMost = const.frame_chosen_size_pix * const.ppd;                  % (?)
 
 % extra degree
 const.frame_resp_tol = vaDeg2pix(1, scr);                                   % give a few more pixels around actual frame to respond
@@ -135,10 +130,9 @@ const.frame_radius_max = const.frame_default_size_pix/2 ...
 const.frame_radius_min = const.frame_default_size_pix/2 ...
     - const.frame_default_thick_pix - const.frame_resp_tol;                 % (?)
 
-const.ring_col_hsv_lst = NaN(const.direction_nb, 3);
-const.hues1 = linspace(0, 1, const.direction_nb+1);
-const.hues1 = const.hues1(1:const.direction_nb);
-
+const.ring_col_hsv_lst = NaN(const.direction_nb, 3);                        % (?)
+const.hues1 = linspace(0, 1, const.direction_nb+1);                         % (?)
+const.hues1 = const.hues1(1:const.direction_nb);                            
 const.hues2 = NaN(1, const.direction_nb);
 const.hues2 = NaN(1, const.direction_nb);
 for ii = 1:const.direction_nb
@@ -152,24 +146,24 @@ for ii = 1:const.direction_nb
         end
     end
 end
-const.ring_col_hsv_lst(:, 1) = const.hues2;
-const.ring_col_hsv_lst(:, 2) = 0.333; % saturation
-const.ring_col_hsv_lst(:, 3) = 0.750; % value
-const.ring_col_rgb_lst = hsv2rgb(const.ring_col_hsv_lst);
-const.ring_col_rgb_lst = const.ring_col_rgb_lst-0.5;
-const.ring_col_rgb_lst = const.ring_col_rgb_lst;
+const.ring_col_hsv_lst(:, 1) = const.hues2;                                 % (?)
+const.ring_col_hsv_lst(:, 2) = 0.333;                                       % (?)
+const.ring_col_hsv_lst(:, 3) = 0.750;                                       % (?)
+const.ring_col_rgb_lst = hsv2rgb(const.ring_col_hsv_lst);                   % (?)
+const.ring_col_rgb_lst = const.ring_col_rgb_lst-0.5;                        % (?)
+const.ring_col_rgb_lst = const.ring_col_rgb_lst;                            % (?)
 
-const.color_wheel_rect = CenterRect([0, 0, const.frame_chosen_size_pix, ...
-                                    const.frame_chosen_size_pix], ...
+const.color_wheel_rect = CenterRect([0, 0, const.frame_chosen_size_pix, ... % (?)
+                                    const.frame_chosen_size_pix], ...   
                                     [0, 0, scr.scr_sizeX, scr.scr_sizeY]);
 
 % Trial settings
-const.nb_repeat = 4;
-const.nb_trials = const.nb_repeat * length(const.prob_signal_lst) * ...
+const.nb_repeat = 4;                                                        % Trial repetition
+const.nb_trials = const.nb_repeat * length(const.prob_signal_lst) * ...     % Number of trials
     length(const.prob_signal_lst);
 
 % Compute a single gabor
-texrect = [0, 0, const.im_wdth, const.im_hght];
+texrect = [0, 0, const.im_wdth, const.im_hght];                             % Single gabor rect
 
 % windmill
 anglesWINDstart=[-135:90:135];
@@ -209,27 +203,24 @@ for rr = 1:const.stim_nb_rows
     end
 end
 
-% -> prepare windmill
-const.dstRects1 = const.dstRects1(:, ~isnan(const.dstRects1(1, :))); % windmill 1
-const.dstRects2 = const.dstRects2(:, ~isnan(const.dstRects2(1, :))); % windmill 12
-
+% Windmill rects
+const.dstRects1 = const.dstRects1(:, ~isnan(const.dstRects1(1, :)));
+const.dstRects2 = const.dstRects2(:, ~isnan(const.dstRects2(1, :)));
 if size(const.dstRects2,2)==size(const.dstRects1,2)
 else
     error('Windmill conditions should have equal numbers of Gabors, try to use different ppd')   
 end
 
-
 const.mypars = repmat([0, const.gabor_freq_cpp, const.gabor_sc, ...
     const.gabor_contrast, const.gabor_aspectratio, 0, 0, 0]', 1, ...
     const.gabor_count);
-
-
 
 % define total TR numbers and scan duration
 if const.scanner
     const.TRs = 0;
     fprintf(1,'\n\tScanner parameters; %1.0f TRs, %1.2f seconds, %s\n',...
-        const.TRs,const.TR_dur,datestr(seconds((const.TRs*const.TR_dur)),'MM:SS'));
+        const.TRs,const.TR_dur,datestr(seconds((const.TRs * const.TR_dur...
+        )),'MM:SS'));
 end
 
 % Eyelink calibration value
@@ -251,19 +242,19 @@ cx = round(scr.x_mid + scr.x_mid*[0 cx1 cx2]);
 cy = round(scr.y_mid + scr.x_mid*[0 cy1 cy2]);
  
 % order for eyelink
-const.calibCoord = round([  cx(1), cy(1),...   % 1.  center center
-                            cx(9), cy(9),...   % 2.  center up
-                            cx(13),cy(13),...  % 3.  center down
-                            cx(5), cy(5),...   % 4.  left center
-                            cx(2), cy(2),...   % 5.  right center
-                            cx(4), cy(4),...   % 6.  left up
-                            cx(3), cy(3),...   % 7.  right up
-                            cx(6), cy(6),...   % 8.  left down
-                            cx(7), cy(7),...   % 9.  right down
-                            cx(10),cy(10),...  % 10. left up
-                            cx(8), cy(8),...   % 11. right up
-                            cx(11),cy(11),...  % 12. left down
-                            cx(12),cy(12)]);    % 13. right down
+const.calibCoord = round([  cx(1), cy(1),...                                % 1.  center center
+                            cx(9), cy(9),...                                % 2.  center up
+                            cx(13),cy(13),...                               % 3.  center down
+                            cx(5), cy(5),...                                % 4.  left center
+                            cx(2), cy(2),...                                % 5.  right center
+                            cx(4), cy(4),...                                % 6.  left up
+                            cx(3), cy(3),...                                % 7.  right up
+                            cx(6), cy(6),...                                % 8.  left down
+                            cx(7), cy(7),...                                % 9.  right down
+                            cx(10),cy(10),...                               % 10. left up
+                            cx(8), cy(8),...                                % 11. right up
+                            cx(11),cy(11),...                               % 12. left down
+                            cx(12),cy(12)]);                                % 13. right down
 
 % compute validation target locations (calibration targets smaller radius)
 const.valid_amp_ratio = const.calib_amp_ratio*0.8;
@@ -273,18 +264,18 @@ vx = round(scr.x_mid + scr.x_mid*[0 vx1 vx2]);
 vy = round(scr.y_mid + scr.x_mid*[0 vy1 vy2]);
  
 % order for eyelink
-const.validCoord =round( [  vx(1), vy(1),...   % 1.  center center
-                             vx(9), vy(9),...   % 2.  center up
-                             vx(13),vy(13),...  % 3.  center down
-                             vx(5), vy(5),...   % 4.  left center
-                             vx(2), vy(2),...   % 5.  right center
-                             vx(4), vy(4),...   % 6.  left up
-                             vx(3), vy(3),...   % 7.  right up
-                             vx(6), vy(6),...   % 8.  left down
-                             vx(7), vy(7),...   % 9.  right down
-                             vx(10),vy(10),...  % 10. left up
-                             vx(8), vy(8),...   % 11. right up
-                             vx(11),vy(11),...  % 12. left down
-                             vx(12),vy(12)]);    % 13. right down
+const.validCoord =round( [  vx(1), vy(1),...                                % 1.  center center
+                             vx(9), vy(9),...                               % 2.  center up
+                             vx(13),vy(13),...                              % 3.  center down
+                             vx(5), vy(5),...                               % 4.  left center
+                             vx(2), vy(2),...                               % 5.  right center
+                             vx(4), vy(4),...                               % 6.  left up
+                             vx(3), vy(3),...                               % 7.  right up
+                             vx(6), vy(6),...                               % 8.  left down
+                             vx(7), vy(7),...                               % 9.  right down
+                             vx(10),vy(10),...                              % 10. left up
+                             vx(8), vy(8),...                               % 11. right up
+                             vx(11),vy(11),...                              % 12. left down
+                             vx(12),vy(12)]);                               % 13. right down
 
 end
