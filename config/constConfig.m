@@ -43,8 +43,6 @@ const.conf_resp_dur_sec = 2 * const.TR_sec;                                 % Co
 const.conf_resp_dur_frm = round(const.conf_resp_dur_sec/...
     scr.frame_duration);                                                    % Confidence response duration in screen frames
 
-const.ramp_fr = 3;                                                          % Duration of the ramp (must be odd number) in screen frames
-const.ramp_sec = const.ramp_fr*scr.frame_duration;                          % Duration of the ramp in seconds
 
 % Stim parameters
 [const.ppd] = vaDeg2pix(1, scr); % one pixel per dva
@@ -63,10 +61,6 @@ const.pix2phadva = 360 / const.gabor_period;                                % (?
 const.gabor_contrast = 0.4;                                                 % Contrast of grating (Michelson contrast)
 const.gabor_aspectratio = 1.0;                                              % Gabor aspect ratio width vs. height:
 
-const.ramp_frIN = (const.ramp_fr-1)/2;                                      % (?)
-const.ramp_frOUT = (const.ramp_fr-1)/2;                                     % (?)
-const.contVecRamp = flip(linspace(0,const.gabor_contrast,const.ramp_fr+2)); % (?)
-const.contRamp = const.contVecRamp(2:end-1);                                % (?)
 
 const.stim_nb_rows = 25;                                                    % Stimulus rows and columns
 const.stim_row_dist_dva = 0.625;                                            % Distance between 2 rows (or 2 columns) in dva
@@ -80,6 +74,20 @@ const.stim_inner_pix = vaDeg2pix(const.stim_inner_dva, scr);                % In
 
 const.ngabors = const.stim_nb_rows * const.stim_nb_rows;
 
+const.gabor_speed_dva_sec = 0.5;                                            % Gabor speed in dva/sec
+const.gabor_speed_dva_frm = const.gabor_speed_dva_sec / scr.hz;             % Gabor speed in dva/frame
+const.gabor_speed_pix_frm = const.gabor_speed_dva_frm * const.ppd;          % Gabor speed in pix/frame
+const.gabor_speed_phadeg_frm = const.gabor_speed_pix_frm * const.pix2phadva;% Gabor speed in phase in dva/frame
+
+% contrast ramp at the end of stimuli (implemented later)
+const.ramp_fr = 3;                                                          % Duration of the ramp (must be odd number) in screen frames
+const.ramp_sec = const.ramp_fr*scr.frame_duration;                          % Duration of the ramp in seconds
+const.ramp_frIN = (const.ramp_fr-1)/2;                                      % (?)
+const.ramp_frOUT = (const.ramp_fr-1)/2;                                     % (?)
+const.contVecRamp = flip(linspace(0,const.gabor_contrast,const.ramp_fr+2)); % (?)
+const.contRamp = const.contVecRamp(2:end-1);                                % (?)
+
+
 const.orient_dva_lst = 1;                                                   % orientation (?)
 const.orient_nb = length(const.orient_dva_lst);                             % number of orientations
 
@@ -91,11 +99,9 @@ const.prob_signal_lst = [0.4, 0.7, 1];                                      % li
 const.prob_signal_txt = {'0.4', '0.7', '1'};                                % list of signal probabiliyt in text
 const.prob_signal_nb = length(const.prob_signal_lst);                       % number of signal probability
 
-const.gabor_speed_dva_sec = 0.5;                                            % Gabor speed in dva/sec
-const.gabor_speed_dva_frm = const.gabor_speed_dva_sec / scr.hz;             % Gabor speed in dva/frame
-const.gabor_speed_pix_frm = const.gabor_speed_dva_frm * const.ppd;          % Gabor speed in pix/frame
-const.gabor_speed_phadeg_frm = const.gabor_speed_pix_frm * const.pix2phadva;% Gabor speed in phase in dva/frame
 
+
+% response ring (will be simplified later)
 const.frame_default_thick_dva = 0.4;                                        % (?) default ring width (deg)
 const.frame_chosen_thick_dva = 0.4;                                         % (?) increase width when chosen (deg)
 const.frame_default_thick_pix = vaDeg2pix(const.frame_default_thick_dva,...
@@ -216,21 +222,6 @@ end
 const.mypars = repmat([0, const.gabor_freq_cpp, const.gabor_sc, ...
     const.gabor_contrast, const.gabor_aspectratio, 0, 0, 0]', 1, ...
     const.gabor_count);
-
-const.gabor_speed_inc = NaN(2, const.gabor_count);                  % speed increments for the 2 intrvls
-const.evidence_lst = NaN(const.direction_nb, const.gabor_count);
-const.gabor_orient_deg = NaN(2, const.gabor_count);                 % list of orientations for 2 intvls
-const.gabor_phase_lst = NaN(2, const.gabor_count);                  % phases for the 2 intrvls
-
-% pre-allocation
-const.is_signal = NaN(1, const.gabor_count);
-const.intended_global_dir = NaN(1, const.gabor_count);
-const.issignalS = NaN(const.nb_trials, 2, const.gabor_count);
-const.intended_global_dirS = NaN(const.nb_trials, 2, const.gabor_count);
-const.gabor_orient_degS = NaN(const.nb_trials, 2, const.gabor_count);
-const.target_dir_lst_degS = NaN(const.nb_trials, 2);
-const.prob_signal_intrvlS = NaN(const.nb_trials, 2);
-const.gabor_speed_incS = NaN(const.nb_trials, 2, const.gabor_count);
 
 
 

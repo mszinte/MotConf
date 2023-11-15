@@ -94,6 +94,18 @@ for t_trial = 1:const.nb_trials
     % 14: confidence reaction time
     
 end
+
+
+
+% pre-allocation
+
+expDes.issignalS = NaN(const.nb_trials, 2, const.gabor_count);
+expDes.intended_global_dirS = NaN(const.nb_trials, 2, const.gabor_count);
+expDes.gabor_orient_degS = NaN(const.nb_trials, 2, const.gabor_count);
+expDes.gabor_speed_incS = NaN(const.nb_trials, 2, const.gabor_count);
+expDes.gabor_phase_lst = NaN(const.nb_trials, 2, const.gabor_count);
+
+
 % calculate all fixed parameters of Gabors for each Trials
 % -> randomize Gabor orientations
 expDes.gabor_orient_degS = (randi([0, 4294967295],[const.nb_trials,2, const.gabor_count]) ./ 4294967296).*180;
