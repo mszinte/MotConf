@@ -82,13 +82,12 @@ const.gabor_speed_pix_frm = const.gabor_speed_dva_frm * const.ppd;          % Ga
 const.gabor_speed_phadeg_frm = const.gabor_speed_pix_frm * const.pix2phadva;% Gabor speed in phase in dva/frame
 
 % contrast ramp at the end of stimuli (implemented later)
-const.ramp_sec = 0.100;                                                     % Duration of the ramp in seconds
-const.ramp_frm = round(const.ramp_sec/scr.frame_duration);                  % Duration of the ramp in screen frames
-const.ramp_down = flip(linspace(0,const.gabor_contrast,const.ramp_frm));
-const.ramp_up = linspace(0,const.gabor_contrast,const.ramp_frm);
-const.contrast_vector = ones(1,const.mot_dur_frm)*const.gabor_contrast;
-const.contrast_vector(1:const.ramp_frm) = const.ramp_up;
-const.contrast_vector(end-const.ramp_frm+1:end) = const.ramp_down;
+const.ramp_fr = 3;                                                          % Duration of the ramp (must be odd number) in screen frames
+const.ramp_sec = const.ramp_fr*scr.frame_duration;                          % Duration of the ramp in seconds
+const.ramp_frIN = (const.ramp_fr-1)/2;                                      % (?)
+const.ramp_frOUT = (const.ramp_fr-1)/2;                                     % (?)
+const.contVecRamp = flip(linspace(0,const.gabor_contrast,const.ramp_fr)); % (?)
+const.contRamp = const.contVecRamp(2:end-1);                                % (?)
 
 const.orient_dva_lst = 1;                                                   % orientation (?)
 const.orient_nb = length(const.orient_dva_lst);                             % number of orientations

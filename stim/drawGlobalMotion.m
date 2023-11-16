@@ -29,13 +29,14 @@ if mot_nbf == 1
     expDes.mypars(1, :) = squeeze(expDes.gabor_phase_lst(expDes.trial, ...
         mot_int, :));
 else
-    expDes.mypars(1,:) = expDes.mypars(1, :) - gabor_speed';
+    expDes.mypars(1,:) = expDes.mypars(1, :) - gabor_speed';    
 end
+expDes.mypars(4,:) = const.contrast_vector(mot_nbf);
+
 gabor_orient = squeeze(expDes.gabor_orient_degS(expDes.trial, ...
     mot_int, :));
 
 % Draw motion
-
 Screen('DrawTextures', scr.main, const.gabortex, [], dstRects,...
     gabor_orient, [], [], [], [], kPsychDontDoRotation, ...
     expDes.mypars);

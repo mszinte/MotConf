@@ -28,9 +28,7 @@ if const.expStart
     end
 end
 
-if const.training
-    const.sjct = sprintf('%st',const.sjct);
-end
+
 
 % Define session
 const.sesNum = input(sprintf('\n\tSession number: '));
@@ -75,4 +73,8 @@ if ~const.expStart
     const.recEye = 1;
 end
 
+% training
+if const.training
+    const.sjct = sprintf('%st',const.sjct);
+end
 end

@@ -26,23 +26,39 @@ if (scr.scr_sizeX ~= const.desiredRes(1) || scr.scr_sizeY ~= ...
         const.desiredRes(1),const.desiredRes(2));
 end
 
+% Overwrite if scanning
+if const.scanner == 1 && const.scannerTest
+    const.comp = 1;
+end
+
 % Size of the display
-if const.scanner == 1
+if const.comp == 1
     % Settings 3T MRI room projector
-    scr.disp_sizeX = 773.33;
+    scr.disp_sizeX = 773;
     scr.disp_sizeY = 435;
-    scr.dist = 120;
+    scr.dist = 119;
     scr.distTop = 1210;
     scr.distBot = 1210;
-else
+elseif const.comp == 2
+    % Can laptop
+    scr.disp_sizeX = 309;
+    scr.disp_sizeY = 174;
+    scr.dist = 42;
+    scr.distTop = 450;
+    scr.distBot = 450;
+elseif const.comp == 3
     % Settings for Display ++ INT
     scr.disp_sizeX = 696;
     scr.disp_sizeY = 391;
-    scr.dist = 108;
+    scr.dist = 120;
     scr.distTop = 1009;
     scr.distBot = 1008;
-
 end
+
+
+    
+    
+
 scr.disp_sizeLeft = round(-scr.disp_sizeX/2);
 scr.disp_sizeRight = round(scr.disp_sizeX/2);
 scr.disp_sizeTop = round(scr.disp_sizeY/2);

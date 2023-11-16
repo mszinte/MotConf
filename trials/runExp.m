@@ -1,4 +1,4 @@
-function const = runExp(scr, const, expDes, my_key, eyetrack)
+function const = runExp(scr, const, expDes, my_key, eyetrack, aud)
 % ----------------------------------------------------------------------
 % const = runExp(scr, const, expDes, my_key, eyetrack)
 % ----------------------------------------------------------------------
@@ -10,6 +10,8 @@ function const = runExp(scr, const, expDes, my_key, eyetrack)
 % const : struct containing constant configurations
 % expDes : struct containg experimental design
 % my_key : structure containing keyboard configurations
+% eyetrack : structure containing eyetracking configurations
+% aud : structure containing audio configurations
 % ----------------------------------------------------------------------
 % Output(s):
 % const : struct containing constant configurations
@@ -118,7 +120,7 @@ const.gabortex = CreateProceduralGabor(scr.main, round(const.im_wdth), ...
 % Main trial loop
 for trial = 1:const.nb_trials
     expDes.trial = trial;
-    expDes = runTrials(scr, const, expDes, my_key);
+    expDes = runTrials(scr, const, expDes, my_key, aud);
 end
 
 % Compute/Write mean/std behavioral data

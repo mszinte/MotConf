@@ -45,7 +45,7 @@ end
 [~, keyCodeMat] = KbQueueCheck(my_key.keyboard_idx(1));
 my_key.keyCodeNum = numel(keyCodeMat);
 
-if const.scanner == 1
+if const.scanner == 1 && ~const.scannerTest
     
     % NI board acquisition settings
     warning off;

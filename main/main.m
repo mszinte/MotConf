@@ -22,6 +22,11 @@ const = dirSaveFile(const);
 % Screen configurations
 scr = scrConfig(const);
 
+% Audio configurations
+if const.training; aud = audioConfig;
+else; aud = [];
+end
+
 % Triggers and button configurations
 my_key = keyConfig(const);
 
@@ -37,8 +42,19 @@ PsychImaging('AddTask', 'General', 'FloatingPoint32BitIfPossible');
 PsychImaging('AddTask', 'General', 'NormalizedHighresColorRange');
 [scr.main, scr.rect] = PsychImaging('OpenWindow', scr.scr_num, ...
     const.background_color);
+Screen('BlendFunction', scr.main, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 Priority(MaxPriority(scr.main));
-Screen('BlendFunction', scr.main, GL_ONE, GL_ONE);
+
+% Open sound pointer
+if const.training
+    aud.master_main = PsychPortAudio('Open', [], aud.master_mode,...
+        aud.master_reqlatclass, aud.master_rate, aud.master_nChannels);
+    PsychPortAudio('Start', aud.master_main, aud.master_rep, ...
+        aud.master_when, aud.master_waitforstart);
+    PsychPortAudio('Volume', aud.master_main, aud.master_globalVol);
+    aud.stim_handle = PsychPortAudio('OpenSlave', aud.master_main, ...
+        aud.slaveStim_mode);
+end
 
 % Initialize eye tracker
 if const.tracker
@@ -48,7 +64,7 @@ else
 end
 
 % Trial runner
-const = runExp(scr, const, expDes, my_key, eyetrack);
+const = runExp(scr, const, expDes, my_key, eyetrack, aud);
 
 % End
 overDone(const, my_key)

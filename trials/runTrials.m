@@ -1,6 +1,6 @@
-function expDes = runTrials(scr, const, expDes, my_key)
+function expDes = runTrials(scr, const, expDes, my_key, aud)
 % ----------------------------------------------------------------------
-% expDes = runTrials(scr, const, expDes, my_key);
+% expDes = runTrials(scr, const, expDes, my_key, aud)
 % ----------------------------------------------------------------------
 % Goal of the function :
 % Draw stimuli of each indivual trial and waiting for inputs
@@ -10,6 +10,7 @@ function expDes = runTrials(scr, const, expDes, my_key)
 % const : struct containing constant configurations
 % expDes : struct containg experimental design
 % my_key : structure containing keyboard configurations
+% aud : structure containing audio configurations
 % ----------------------------------------------------------------------
 % Output(s):
 % resMat : experimental results (see below)
@@ -67,8 +68,7 @@ trial_offset = conf_iti_nbf_off;
 % Wait first MRI trigger
 if t == 1
     Screen('FillRect',scr.main,const.background_color);
-    drawBullsEye(scr, const, scr.x_mid, scr.y_mid, const.red, 'conf');
-    drawColorWheel(scr, const);
+    drawBullsEye(scr, const, scr.x_mid, scr.y_mid, 'conf');
     Screen('Flip',scr.main);
     
     first_trigger = 0;
@@ -132,31 +132,29 @@ while nbf <= trial_offset
     % Draw background
     Screen('FillRect', scr.main, const.background_color );
     
-    % Color wheel
-    drawColorWheel(scr, const)
-    
     % Interval 1: motion signal
     if nbf >= int1_signal_nbf_on && nbf <= int1_signal_nbf_off
-        drawBullsEye(scr, const, scr.x_mid, scr.y_mid, const.red, 'int1');
+        drawBullsEye(scr, const, scr.x_mid, scr.y_mid, 'int1');
         mot_int1_nbf = mot_int1_nbf + 1;
+        
         expDes = drawGlobalMotion(scr, const, expDes, 1, mot_int1_nbf);
     end
     
     % Interval 1: motion direction judgment
     time2resp_int1 = 0;
     if nbf >= int1_resp_nbf_on && nbf <= int1_resp_nbf_off
-        drawBullsEye(scr, const, scr.x_mid, scr.y_mid, const.green, 'int1');
+        drawBullsEye(scr, const, scr.x_mid, scr.y_mid, 'int1');
         time2resp_int1 = 1;
     end
     
     % Interval 1: inter-trial interval
     if nbf >= int1_iti_on && nbf <= int1_iti_off
-        drawBullsEye(scr, const, scr.x_mid, scr.y_mid, const.red, 'int1');
+        drawBullsEye(scr, const, scr.x_mid, scr.y_mid, 'int1');
     end
     
     % Interval 2: motion signal
     if nbf >= int2_signal_nbf_on && nbf <= int2_signal_nbf_off
-        drawBullsEye(scr, const, scr.x_mid, scr.y_mid, const.red, 'int2');
+        drawBullsEye(scr, const, scr.x_mid, scr.y_mid, 'int1');
         mot_int2_nbf = mot_int2_nbf + 1;
         expDes = drawGlobalMotion(scr, const, expDes, 2, mot_int2_nbf);
     end
@@ -164,25 +162,25 @@ while nbf <= trial_offset
     % Interval 2: motion direction judgment
     time2resp_int2 = 0;
     if nbf >= int2_resp_nbf_on && nbf <= int2_resp_nbf_off
-        drawBullsEye(scr, const, scr.x_mid, scr.y_mid, const.green, 'int2');
+        drawBullsEye(scr, const, scr.x_mid, scr.y_mid, 'int1');
         time2resp_int2 = 1;
     end
     
     % Interval 2: inter-trial interval
     if nbf >= int2_iti_on && nbf <= int2_iti_off
-        drawBullsEye(scr, const, scr.x_mid, scr.y_mid, const.red, 'int2');
+        drawBullsEye(scr, const, scr.x_mid, scr.y_mid, 'int1');
     end
     
     % Confidence response
     time2resp_conf = 0;
     if nbf >= conf_resp_nbf_on && nbf <= conf_resp_nbf_off
-        drawBullsEye(scr, const, scr.x_mid, scr.y_mid, const.green, 'conf');
+        drawBullsEye(scr, const, scr.x_mid, scr.y_mid, 'conf');
         time2resp_conf = 1;
     end
        
     % Intertrials interval
     if nbf >= conf_iti_nbf_on && nbf <= conf_iti_nbf_off
-        drawBullsEye(scr, const, scr.x_mid, scr.y_mid, const.red, 'conf');
+        drawBullsEye(scr, const, scr.x_mid, scr.y_mid, 'conf');
     end
             
     % Check keyboard
@@ -194,7 +192,7 @@ while nbf <= trial_offset
         keyCode = keyCode + keyC;
     end
 
-    if const.scanner == 1
+    if const.scanner == 1 && ~const.scannerTest
         input_return = [my_key.ni_session2.inputSingleScan, ...
             my_key.ni_session1.inputSingleScan];
         
@@ -411,6 +409,10 @@ end
 if resp_conf == 0
     expDes.expMat(t, 13) = 0;
     expDes.expMat(t, 14) = 0;
+end
+
+if const.training
+    my_sound(t, 4)
 end
     
 end

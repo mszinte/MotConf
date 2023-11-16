@@ -22,7 +22,7 @@ dirImage = [dirImageFile,nameImage,'.png'];
 [imageToDraw,~,alpha] = imread(dirImage);
 imageToDraw(:,:,4) = alpha;
 
-t_handle = Screen('MakeTexture', scr.main, imageToDraw./255);
+t_handle = Screen('MakeTexture', scr.main, imageToDraw);
 texrect = Screen('Rect', t_handle);
 push_button = 0;
 
@@ -51,7 +51,7 @@ while ~push_button
         keyCode = keyCode + keyC;
     end
     
-    if const.scanner == 1
+    if const.scanner == 1 && ~const.scannerTest
         input_return = [my_key.ni_session2.inputSingleScan, ...
             my_key.ni_session1.inputSingleScan];
         if input_return(my_key.idx_button_right1)...
