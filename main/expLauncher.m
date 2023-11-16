@@ -32,16 +32,17 @@ Screen('CloseAll'); clear all; clear mex; clear functions; close all; ...
 
 % General settings
 const.expName = 'MotConf';      % experiment name
-const.expStart = 0;             % Start of a recording (0 = NO, 1 = YES)
-const.checkTrial = 1;           % Print trial conditions (0 = NO, 1 = YES)
+const.expStart = 1;             % Start of a recording (0 = NO, 1 = YES)
+const.checkTrial = 0;           % Print trial conditions (0 = NO, 1 = YES)
 const.mkVideo = 0;              % Make a video (0 = NO, 1 = YES)
 
 % External controls
-const.tracker = 0;              % run with eye tracker (0 = NO, 1 = YES)
-const.comp = 1;                 % run in which computer (1 = MRI; 2 = Can laptop; 3 = Diplay++)
+const.tracker = 1;              % run with eye tracker (0 = NO, 1 = YES)
+const.comp = 3;                 % run in which computer (1 = MRI; 2 = Can laptop; 3 = Diplay++)
 const.scanner = 1;              % run in MRI scanner (0 = NO, 1 = YES)
 const.scannerTest = 1;          % fake scanner trigger (0 = NO, 1 = YES)
 const.training = 0;             % training session (0 = NO, 1 = YES)
+const.run_total = 5;            % number of run in total
 
 % Desired screen setting
 const.desiredFD = 120;          % Desired refresh rate

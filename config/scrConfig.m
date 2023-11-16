@@ -27,7 +27,7 @@ if (scr.scr_sizeX ~= const.desiredRes(1) || scr.scr_sizeY ~= ...
 end
 
 % Overwrite if scanning
-if const.scanner == 1 && const.scannerTest
+if const.scanner == 1 && ~const.scannerTest
     const.comp = 1;
 end
 
@@ -50,9 +50,9 @@ elseif const.comp == 3
     % Settings for Display ++ INT
     scr.disp_sizeX = 696;
     scr.disp_sizeY = 391;
-    scr.dist = 120;
-    scr.distTop = 1009;
-    scr.distBot = 1008;
+    scr.dist = 61;
+    scr.distTop = 650;
+    scr.distBot = 650;
 end
 
 

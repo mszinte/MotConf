@@ -31,15 +31,15 @@ fclose(const.behav_file_fid);
 
 % Transfer .edf file
 if const.tracker
-    statRecFile = Eyelink('ReceiveFile', const.eyelink_temp_file, ...
-        const.eyelink_temp_file);
+    statRecFile = Eyelink('ReceiveFile', const.eyetrack_temp_file, ...
+        const.eyetrack_temp_file);
     
     if statRecFile ~= 0
         fprintf(1,'\n\n\tEDF file correctly transfered\n');
     else
         fprintf(1,'\n\n\tError in EDF file transfer\n');
-        statRecFile2 = Eyelink('ReceiveFile', const.eyelink_temp_file,...
-            const.eyelink_temp_file);
+        statRecFile2 = Eyelink('ReceiveFile', const.eyetrack_temp_file,...
+            const.eyetrack_temp_file);
         if statRecFile2 == 0
             fprintf(1,'\n\n\tEDF file now correctly transfered\n');
         else
@@ -58,8 +58,8 @@ end
 
 % Rename eye tracker file
 if const.tracker 
-    oldDir = const.eyelink_temp_file;
-    newDir = const.eyelink_local_file;
+    oldDir = const.eyetrack_temp_file;
+    newDir = const.eyetrack_local_file;
     movefile(oldDir, newDir);
 end
 

@@ -27,8 +27,8 @@ const.dat_output_file = sprintf('data/%s/%s/%s/%s_%s_task-%s_%s',...
     const.session, const.task, const.run);
 
 % Define eye data filename
-const.eyelink_temp_file = 'XX.edf';
-const.eyelink_local_file = sprintf('%s_eyetrack.edf', ...
+const.eyetrack_temp_file = 'XX.edf';
+const.eyetrack_local_file = sprintf('%s_eyetrack.edf', ...
     const.dat_output_file);
 
 % Define behavioral data filename

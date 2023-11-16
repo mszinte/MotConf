@@ -57,7 +57,7 @@ if const.tracker
         'CALIBRATION INSTRUCTION - PRESS SPACE');
     instructionsIm(scr, const, my_key, ...
         sprintf('Calibration%s', scanTxt), 0);
-    calibresult = EyeyetrackinkDoTrackerSetup(eyetrack);
+    calibresult = EyelinkDoTrackerSetup(eyetrack);
     if calibresult == eyetrack.TERMINATE_KEY
         return
     end
@@ -72,21 +72,21 @@ record = 0;
 while ~record
     if const.tracker
         if ~record
-            Eyeyetrackink('startrecording');
+            Eyelink('startrecording');
             key = 1;
             while key ~=  0
-                key = EyeyetrackinkGetKey(eyetrack);
+                key = EyelinkGetKey(eyetrack);
             end
-            error = Eyeyetrackink('checkrecording');
+            error = Eyelink('checkrecording');
             if error==0
                 record = 1;
-                Eyeyetrackink('message', 'RECORD_START');
-                Eyeyetrackink('command', ...
+                Eyelink('message', 'RECORD_START');
+                Eyelink('command', ...
                     sprintf('record_status_message ''RUN %i''',...
                     const.runNum));
             else
                 record = 0;
-                Eyeyetrackink('message', 'RECORD_FAILURE');
+                Eyelink('message', 'RECORD_FAILURE');
             end
         end
     else
@@ -169,7 +169,7 @@ for trial = 1:const.nb_trials
 end
 
 % End messages
-if const.runNum == size(const.cond_run_order,1)
+if const.runNum == const.run_total
     instructionsIm(scr,const,my_key,'End',1);
 else
     instructionsIm(scr,const,my_key,'End_block',1);
@@ -183,11 +183,11 @@ save(const.mat_file,'config');
 
 % Stop Eyetracking
 if const.tracker
-    Eyeyetrackink('command','clear_screen');
-    Eyeyetrackink('command', 'record_status_message ''END''');
+    Eyelink('command','clear_screen');
+    Eyelink('command', 'record_status_message ''END''');
     WaitSecs(1);
-    Eyeyetrackink('stoprecording');
-    Eyeyetrackink('message', 'RECORD_STOP');
+    Eyelink('stoprecording');
+    Eyelink('message', 'RECORD_STOP');
     eyeLinkClearScreen(eyetrack.bgCol);
     eyeLinkDrawText(scr.x_mid, scr.y_mid, eyetrack.txtCol,...
         'THE END - PRESS SPACE OR WAIT');
