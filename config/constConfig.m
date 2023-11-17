@@ -32,19 +32,25 @@ const.background_color = const.gray;
 const.TR_sec = 1.2;                                                         % MRI time repetition in seconds
 const.TR_frm = round(const.TR_sec/scr.frame_duration);                      % MRI time repetition in seconds in screen frames
 
-const.mot_dur_sec = 1 * const.TR_sec;                                       % Motion stimulus duration in seconds
+const.mot_dur_TR = 1;                                                       % Motion stimulus duration in scanner TR
+const.mot_dur_sec = const.mot_dur_TR * const.TR_sec;                        % Motion stimulus duration in seconds
 const.mot_dur_frm = round(const.mot_dur_sec /scr.frame_duration);           % Total stimulus duration in screen frames
 
-const.mot_resp_dur_sec = 2 * const.TR_sec;                                  % Motion response time duration in seconds
+const.mot_resp_dur_TR = 2;                                                  % Motion response time duration in scanner TR
+const.mot_resp_dur_sec = const.mot_resp_dur_TR * const.TR_sec;              % Motion response time duration in seconds
 const.mot_resp_dur_frm = round(const.mot_resp_dur_sec/scr.frame_duration);  % Motion response time duration in screen frames
 
-const.iti_dur_sec = 1 * const.TR_sec;                                       % Inter-trial interval duration in seconds
+const.iti_dur_TR = 1;                                                       % Inter-trial interval duration in scanner TR
+const.iti_dur_sec = const.iti_dur_TR * const.TR_sec;                        % Inter-trial interval duration in seconds
 const.iti_dur_frm = round(const.iti_dur_sec/scr.frame_duration);            % Inter-trial interval duration in screen frames
 
-const.conf_resp_dur_sec = 2 * const.TR_sec;                                 % Confidence response duration in seconds
+const.conf_resp_dur_TR = 2;                                                 % Confidence response duration in scanner TR
+const.conf_resp_dur_sec = const.conf_resp_dur_TR * const.TR_sec;            % Confidence response duration in seconds
 const.conf_resp_dur_frm = round(const.conf_resp_dur_sec/...
     scr.frame_duration);                                                    % Confidence response duration in screen frames
 
+const.TRs = (const.mot_dur_TR+const.mot_resp_dur_TR+const.iti_dur_TR)*2 ... % TR per trials
+    + const.conf_resp_dur_TR+const.iti_dur_TR;
 
 % Stim parameters
 [const.ppd] = vaDeg2pix(1, scr); % one pixel per dva
@@ -172,9 +178,10 @@ const.mypars = repmat([0, const.gabor_freq_cpp, const.gabor_sc, ...
 
 % define total TR numbers and scan duration
 if const.scanner
-    const.TRs = 0;
-    fprintf(1,'\n\tScanner parameters; %1.0f TRs, %1.2f seconds, %s\n',...
-        const.TRs,const.TR_sec,datestr(seconds((const.TRs * const.TR_sec...
+    const.TRs_total = const.nb_trials*const.TRs;
+    fprintf(1,'\n\tScanner parameters: %1.0f TRs of %1.2f seconds for a tot al of %s\n',...
+        const.TRs_total, const.TR_sec, ...
+        datestr(seconds((const.TRs_total*const.TR_sec...
         )),'MM:SS'));
 end
 

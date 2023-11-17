@@ -58,7 +58,7 @@ int2_resp_nbf_off = int2_resp_nbf_on + const.mot_resp_dur_frm - 1;
 int2_iti_on = int2_resp_nbf_off + 1;
 int2_iti_off = int2_iti_on + const.iti_dur_frm - 1;
 
-% Confidence interval
+% Confidence judgment
 conf_resp_nbf_on = int2_iti_off + 1;
 conf_resp_nbf_off = conf_resp_nbf_on + const.conf_resp_dur_frm - 1;
 conf_iti_nbf_on = conf_resp_nbf_off + 1;
@@ -182,7 +182,7 @@ while nbf <= trial_offset
     if nbf >= conf_iti_nbf_on && nbf <= conf_iti_nbf_off
         drawBullsEye(scr, const, scr.x_mid, scr.y_mid, 'conf');
     end
-            
+
     % Check keyboard
     keyPressed = 0;
     keyCode = zeros(1,my_key.keyCodeNum);
