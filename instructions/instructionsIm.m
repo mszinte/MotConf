@@ -20,7 +20,9 @@ function instructionsIm(scr, const, my_key, nameImage, exitFlag)
 dirImageFile = 'instructions/image/';
 dirImage = [dirImageFile,nameImage,'.png'];
 [imageToDraw,~,alpha] = imread(dirImage);
-imageToDraw(:,:,4) = alpha;
+%apply alpha on your own
+imageToDraw=(imageToDraw.*(repmat(alpha,1,1,3)./255))-(const.background_color(1)*255);
+
 
 t_handle = Screen('MakeTexture', scr.main, imageToDraw);
 texrect = Screen('Rect', t_handle);
