@@ -139,6 +139,7 @@ for rr = 1:const.stim_nb_rows
                
             % generate the windmill patterns
             anglPoint = atan2d((ypos - scr.y_mid), ((xpos - scr.x_mid)));
+            anglPoint=round(anglPoint.*10.^5)./10.^5;
             if and(anglPoint > anglesWINDstart1(1),anglPoint < anglesWINDstart1(1)+45)
                 const.dstRects1(:, gg) = CenterRectOnPoint(texrect, xpos, ypos)';
                 const.gabor_count = const.gabor_count + 1;
