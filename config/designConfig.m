@@ -29,7 +29,7 @@ end
 % 02 = 60 %
 % 03 = 90 %
 
-% Var 2: signal probability of second interva
+% Var 2: signal probability of second interval
 if const.mkVideo
     expDes.twoV = input(sprintf('\n\tVAR 2 : '));
     expDes.nb_var2 = 1;
@@ -37,8 +37,8 @@ else
     expDes.twoV = (1:length(const.prob_signal_lst))';
     expDes.nb_var2 = length(const.prob_signal_lst);
 end
-% 01 = 40 %
-% 02 = 70 %
+% 01 = 30 %
+% 02 = 60 %
 % 03 = 90 %
 
 % Rand 1: signal direction of first interval
