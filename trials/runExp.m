@@ -21,11 +21,15 @@ function const = runExp(scr, const, expDes, my_key, eyetrack, aud)
 
 % Configuration of videos
 if const.mkVideo
+    const.vid_folder = sprintf('others/movie/%s_v1-%i_v2-%i_r1-%i_r2-%i', ...
+        const.task, expDes.oneV, expDes.twoV, expDes.oneR, expDes.twoR);
+    if ~isfolder(const.vid_folder); mkdir(const.vid_folder); end
+    const.movie_image_file = sprintf('%s/img', const.vid_folder);
+    const.movie_file = sprintf('%s.mp4', const.vid_folder);
     expDes.vid_num = 0;
     const.vid_obj = VideoWriter(const.movie_file, 'MPEG-4');
     const.vid_obj.FrameRate = 60;
 	const.vid_obj.Quality = 100;
-    open(const.vid_obj);
 end
 
 % Special instruction for scanner

@@ -19,6 +19,11 @@ function expDes = runTrials(scr, const, expDes, my_key, aud)
 % Function created by Martin SZINTE (martin.szinte@gmail.com)
 % ----------------------------------------------------------------------
 
+% Open video
+if const.mkVideo
+    open(const.vid_obj);
+end
+
 % Trial counter
 t = expDes.trial;
 
@@ -364,7 +369,7 @@ while nbf <= trial_offset
             const.movie_image_file, expDes.vid_num))
         writeVideo(const.vid_obj,image_vid);
     end
-        
+
     % flip screen
     vbl = Screen('Flip',scr.main);
         

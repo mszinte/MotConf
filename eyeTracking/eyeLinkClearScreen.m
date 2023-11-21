@@ -12,9 +12,6 @@ function eyeLinkClearScreen(color)
 % none
 % ----------------------------------------------------------------------
 % Function created by Martin SZINTE (martin.szinte@gmail.com)
-% Last update : 21/ 11 / 2016
-% Project :     pRF_gazeMod
-% Version :     1.0
 % ----------------------------------------------------------------------
 
 Eyelink('command','clear_screen %d',color);

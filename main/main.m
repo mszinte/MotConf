@@ -43,7 +43,6 @@ PsychImaging('AddTask', 'General', 'NormalizedHighresColorRange');
 [scr.main, scr.rect] = PsychImaging('OpenWindow', scr.scr_num, ...
     const.background_color);
 Screen('BlendFunction', scr.main, GL_ONE, GL_ONE);
-
 Priority(MaxPriority(scr.main));
 
 % Open sound pointer

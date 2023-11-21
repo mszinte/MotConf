@@ -53,14 +53,6 @@ const.mat_file = sprintf('%s_matlab.mat', const.dat_output_file);
 % Define .mat stimuli file
 const.stim_folder = sprintf('stim/screenshots');
 
-% Movie file
-if const.mkVideo
-    if ~isfolder(sprintf('others/%s_vid/', const.task))
-        mkdir(sprintf('others/%s_vid/', const.task))
-    end
-    const.movie_image_file = sprintf('others/%s_vid/%s_vid', ...
-        const.task, const.task);
-    const.movie_file = sprintf('others/%s_vid.mp4', const.task);
-end
+
 
 end

@@ -13,9 +13,6 @@ function eyeLinkDrawCross(x,y)
 % none
 % ----------------------------------------------------------------------
 % Function created by Martin SZINTE (martin.szinte@gmail.com)
-% Last update : 21 / 11 / 2016
-% Project :     pRF_gazeMod
-% Version :     1.0
 % ----------------------------------------------------------------------
 
 Eyelink('command','draw_cross %d %d', round(x),round(y));

@@ -109,9 +109,14 @@ const.prob_signal_nb = length(const.prob_signal_lst);                       % nu
 
 
 % Trial settings
-const.nb_repeat = 4;                                                        % Trial repetition
-const.nb_trials = const.nb_repeat * length(const.prob_signal_lst) * ...     % Number of trials
-    length(const.prob_signal_lst);
+if const.mkVideo
+    const.nb_repeat = 1;                                                    % Trial repetition in video mode
+    const.nb_trials = 1;                                                    % Number of trials in video mode
+else
+    const.nb_repeat = 4;                                                    % Trial repetition
+    const.nb_trials = const.nb_repeat * length(const.prob_signal_lst) * ... % Number of trials
+        length(const.prob_signal_lst);
+end
 
 % Compute a single gabor
 texrect = [0, 0, const.im_wdth, const.im_hght];                             % Single gabor rect

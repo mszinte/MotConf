@@ -14,47 +14,67 @@ function expDes = designConfig(const)
 % Function created by Martin SZINTE (martin.szinte@gmail.com)
 % ----------------------------------------------------------------------
 
-% Experimental random variables
 
+% Experimental random variables
 % Var 1: signal probability of first interval
-expDes.oneV = (1:length(const.prob_signal_lst))';
-expDes.nb_var1 = length(const.prob_signal_lst);
+if const.mkVideo
+    expDes.oneV = input(sprintf('\n\tVAR 1 : '));
+    expDes.nb_var1 = 1;
+else
+    expDes.oneV = (1:length(const.prob_signal_lst))';
+    expDes.nb_var1 = length(const.prob_signal_lst);    
+end
+
 % 01 = 40 %
 % 02 = 70 %
 % 03 = 100 %
 
 % Var 2: signal probability of second interva
-expDes.twoV = (1:length(const.prob_signal_lst))';
-expDes.nb_var2 = length(const.prob_signal_lst);
+if const.mkVideo
+    expDes.twoV = input(sprintf('\n\tVAR 2 : '));
+    expDes.nb_var2 = 1;
+else
+    expDes.twoV = (1:length(const.prob_signal_lst))';
+    expDes.nb_var2 = length(const.prob_signal_lst);
+end
 % 01 = 40 %
 % 02 = 70 %
 % 03 = 100 %
 
 % Rand 1: signal direction of first interval
-expDes.oneR = (1:length(const.direction_dva_lst))';
-expDes.nb_rand1 = length(const.direction_dva_lst);
+if const.mkVideo
+    expDes.oneR = input(sprintf('\n\tRAND 1 : '));
+    expDes.nb_rand1 = 1;
+else
+    expDes.oneR = (1:length(const.direction_dva_lst))';
+    expDes.nb_rand1 = length(const.direction_dva_lst);
+end
 % 01 = 45 deg
 % 02 = 135 deg
 % 03 = 225 deg
 % 04 = 315 deg
 
 % Rand 2: signal direction of second interval
-expDes.twoR = (1:length(const.direction_dva_lst))';
-expDes.nb_rand2 = length(const.direction_dva_lst);
+if const.mkVideo
+    expDes.twoR = input(sprintf('\n\tRAND 2 : '));
+    expDes.nb_rand2 = 1;
+else
+    expDes.twoR = (1:length(const.direction_dva_lst))';
+    expDes.nb_rand2 = length(const.direction_dva_lst);
+end
 % 01 = 45 deg
 % 02 = 135 deg
 % 03 = 225 deg
 % 04 = 315 deg
 
 % Experimental configuration :
-expDes.nb_var = 4;
+expDes.nb_var = 2;
 expDes.nb_rand = 2;
-expDes.nb_repeat = const.nb_repeat;
 
 % Experimental loop
-trialMat = zeros(const.nb_trials,expDes.nb_var);
+trialMat = zeros(const.nb_trials, expDes.nb_var);
 ii = 0;
-for rep = 1:expDes.nb_repeat
+for rep = 1:const.nb_repeat
     for var1 = 1:expDes.nb_var1
         for var2 = 1:expDes.nb_var2
             ii = ii + 1;

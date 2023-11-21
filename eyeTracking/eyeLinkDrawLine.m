@@ -16,9 +16,6 @@ function eyeLinkDrawLine(x,y,l_length,l_angle,color)
 % none
 % ----------------------------------------------------------------------
 % Function created by Martin SZINTE (martin.szinte@gmail.com)
-% Last update : 21 / 11 / 2016
-% Project :     pRF_gazeMod
-% Version :     1.0
 % ----------------------------------------------------------------------
 x2 = x + cosd(l_angle) * l_length;
 y2 = y - sind(l_angle) * l_length;

@@ -20,9 +20,6 @@ function eyeLinkDrawBox(x,y,sizeX,sizeY,ELflag,colorFrm,colorFill)
 % none
 % ----------------------------------------------------------------------
 % Function created by Martin SZINTE (martin.szinte@gmail.com)
-% Last update : 21 / 11 / 2016
-% Project :     pRF_gazeMod
-% Version :     1.0
 % ----------------------------------------------------------------------
 
 if ELflag == 1 % framed box

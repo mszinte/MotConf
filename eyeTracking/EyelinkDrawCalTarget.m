@@ -17,9 +17,6 @@ function rect=EyelinkDrawCalTarget(el, x, y)
 % const : struct containing edfFileName
 % ----------------------------------------------------------------------
 % Function created by Martin SZINTE (martin.szinte@gmail.com)
-% Last update : 18 / 01 / 2020
-% Project :     pMFexp
-% Version :     3.0
 % ----------------------------------------------------------------------
 
 Screen('FillRect',el.window,el.backgroundcolour);
