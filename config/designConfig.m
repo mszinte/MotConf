@@ -25,9 +25,9 @@ else
     expDes.nb_var1 = length(const.prob_signal_lst);    
 end
 
-% 01 = 40 %
-% 02 = 70 %
-% 03 = 100 %
+% 01 = 30 %
+% 02 = 60 %
+% 03 = 90 %
 
 % Var 2: signal probability of second interva
 if const.mkVideo
@@ -39,7 +39,7 @@ else
 end
 % 01 = 40 %
 % 02 = 70 %
-% 03 = 100 %
+% 03 = 90 %
 
 % Rand 1: signal direction of first interval
 if const.mkVideo

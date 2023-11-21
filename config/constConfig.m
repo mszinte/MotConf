@@ -103,10 +103,9 @@ const.direction_dva_lst = 45:90:360;                                        % li
 const.direction_dva_txt = {'45 deg', '135 deg', '225 deg', '315 deg'};      % list of signal probabiliyt in text
 const.direction_nb = length(const.direction_dva_lst);                       % number of possible motion directions
 
-const.prob_signal_lst = [0.4, 0.7, 1];                                      % list of signal probability (prob. that a Gabor belongs to target)
-const.prob_signal_txt = {'0.4', '0.7', '1'};                                % list of signal probabiliyt in text
+const.prob_signal_lst = [0.3, 0.6, 0.9];                                    % list of signal probability (prob. that a Gabor belongs to target)
+const.prob_signal_txt = {'0.3', '0.6', '0.9'};                              % list of signal probabiliyt in text
 const.prob_signal_nb = length(const.prob_signal_lst);                       % number of signal probability
-
 
 % Trial settings
 if const.mkVideo
@@ -122,8 +121,8 @@ end
 texrect = [0, 0, const.im_wdth, const.im_hght];                             % Single gabor rect
 
 % windmill
-anglesWINDstart1 = [-135:90:135];
-anglesWINDstart2 = [-180:90:90];
+anglesWINDstart1 = -135:90:135;
+anglesWINDstart2 = -180:90:90;
                                 
 const.dstRects = NaN(4, const.ngabors);
 const.dstRects1 = NaN(4, const.ngabors);
