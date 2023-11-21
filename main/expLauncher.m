@@ -17,7 +17,6 @@
 % - Check screen settings in 3T room
 % - Check daq replacement statements and button box in 3T room
 
-
 % First settings
 Screen('CloseAll'); clear all; clear mex; clear functions; close all; ...
     home; AssertOpenGL;
@@ -37,7 +36,7 @@ const.training = 0;             % training session (0 = NO, 1 = YES)
 const.run_total = 5;            % number of run in total
 
 % Desired screen setting
-const.desiredFD = 60;          % Desired refresh rate
+const.desiredFD = 120;          % Desired refresh rate
 const.desiredRes = [1920,1080]; % Desired resolution
 
 % Path
