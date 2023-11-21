@@ -47,7 +47,7 @@ save(const.mat_file,'config');
 
 % First mouse config
 if const.expStart
-    HideCursor;ListenChar(2);
+    HideCursor;
     for keyb = 1:size(my_key.keyboard_idx,2)
         KbQueueFlush(my_key.keyboard_idx(keyb));
     end
@@ -55,7 +55,7 @@ end
 
 % Initial calibrations
 if const.tracker
-    fprintf(1,'\Calibration instructions - press space or right1-\n');
+    fprintf(1,'\n\tCalibration instructions - press space or right1-\n');
     eyeLinkClearScreen(eyetrack.bgCol);
     eyeLinkDrawText(scr.x_mid, scr.y_mid, eyetrack.txtCol,...
         'CALIBRATION INSTRUCTION - PRESS SPACE');

@@ -64,7 +64,7 @@ if const.tracker
 end
 
 % Close screen
-ShowCursor;ListenChar(1)
+ShowCursor;
 Screen('CloseAll');
 
 % Print block duration

@@ -50,14 +50,11 @@ elseif const.comp == 3
     % Settings for Display ++ INT
     scr.disp_sizeX = 696;
     scr.disp_sizeY = 391;
-    scr.dist = 60;
-    scr.distTop = 650;
-    scr.distBot = 650;
+    scr.dist = 120;
+    scr.distTop = 1210;
+    scr.distBot = 1210;
 end
 
-
-    
-    
 
 scr.disp_sizeLeft = round(-scr.disp_sizeX/2);
 scr.disp_sizeRight = round(scr.disp_sizeX/2);

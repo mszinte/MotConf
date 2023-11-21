@@ -351,16 +351,16 @@ while nbf <= trial_offset
     end
     
     % feedback in training
-    if resp_int1 == 1 && feedback_int1 == 0 && resp_val_int1 == rand1
-        my_sound(4,aud);
-        feedback_int1 = 1;
+    if const.training
+        if resp_int1 == 1 && feedback_int1 == 0 && resp_val_int1 == rand1
+            my_sound(4,aud);
+            feedback_int1 = 1;
+        end
+        if resp_int2 == 1 && feedback_int2 == 0 && resp_val_int2 == rand2
+            my_sound(4,aud);
+            feedback_int2 = 1;
+        end
     end
-    
-    if resp_int2 == 1 && feedback_int2 == 0 && resp_val_int2 == rand2
-        my_sound(4,aud);
-        feedback_int2 = 1;
-    end
-
     % Create movie
     if const.mkVideo
         expDes.vid_num = expDes.vid_num + 1;
