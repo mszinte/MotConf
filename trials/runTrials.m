@@ -124,6 +124,8 @@ mot_int2_nbf = 0;
 resp_int1 = 0;
 resp_int2 = 0;
 resp_conf = 0;
+feedback_int1 = 0;
+feedback_int2 = 0;
 while nbf <= trial_offset
     
     % Flip count
@@ -342,7 +344,18 @@ while nbf <= trial_offset
             end
         end
     end
-        
+    
+    % feedback in training
+    if resp_int1 == 1 && feedback_int1 == 0 && resp_val_int1 == rand1
+        my_sound(4,aud);
+        feedback_int1 = 1;
+    end
+    
+    if resp_int2 == 1 && feedback_int2 == 0 && resp_val_int2 == rand2
+        my_sound(4,aud);
+        feedback_int2 = 1;
+    end
+
     % Create movie
     if const.mkVideo
         expDes.vid_num = expDes.vid_num + 1;
@@ -411,8 +424,5 @@ if resp_conf == 0
     expDes.expMat(t, 14) = 0;
 end
 
-if const.training
-    my_sound(t, 4)
-end
     
 end

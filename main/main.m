@@ -42,7 +42,6 @@ PsychImaging('AddTask', 'General', 'FloatingPoint32BitIfPossible');
 PsychImaging('AddTask', 'General', 'NormalizedHighresColorRange');
 [scr.main, scr.rect] = PsychImaging('OpenWindow', scr.scr_num, ...
     const.background_color);
-%Screen('BlendFunction', scr.main, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 Screen('BlendFunction', scr.main, GL_ONE, GL_ONE);
 
 Priority(MaxPriority(scr.main));

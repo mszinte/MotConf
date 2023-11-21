@@ -36,7 +36,7 @@ if const.comp == 1
     % Settings 3T MRI room projector
     scr.disp_sizeX = 773;
     scr.disp_sizeY = 435;
-    scr.dist = 119;
+    scr.dist = 120;
     scr.distTop = 1210;
     scr.distBot = 1210;
 elseif const.comp == 2
@@ -50,7 +50,7 @@ elseif const.comp == 3
     % Settings for Display ++ INT
     scr.disp_sizeX = 696;
     scr.disp_sizeY = 391;
-    scr.dist = 61;
+    scr.dist = 60;
     scr.distTop = 650;
     scr.distBot = 650;
 end

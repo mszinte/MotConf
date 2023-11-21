@@ -25,8 +25,8 @@ elseif t == 3
     stimFreq = 4000;
     stimDur = 0.2;
 elseif t == 4
-    stimFreq = [7000;5000];
-    stimDur = [0.2;0.2];
+    stimFreq = [400;600];
+    stimDur = [0.15;0.12];
 elseif t == 5
     stimFreq = 5000;
     stimDur = 0.2;
@@ -35,7 +35,7 @@ elseif t == 6
     stimDur = [0.2;0.2;0.2];
 elseif t == 7
     stimFreq = 5000;
-    stimDur = 0.005;
+    stimDur = 0.01;
 elseif t == 8
     stimFreq = [500;300];
     stimDur = [0.15;0.2];
