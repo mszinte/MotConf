@@ -50,9 +50,4 @@ const.behav_file_fid = fopen(const.behav_file, 'w');
 % Define .mat saving file
 const.mat_file = sprintf('%s_matlab.mat', const.dat_output_file);
 
-% Define .mat stimuli file
-const.stim_folder = sprintf('stim/screenshots');
-
-
-
 end

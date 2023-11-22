@@ -94,7 +94,7 @@ for t_trial = 1:const.nb_trials
     randVal2 = randperm(numel(expDes.twoR)); 
     rand_rand2 = expDes.twoR(randVal2(1));
     
-    expDes.expMat(t_trial,:) = [NaN, NaN, const.runNum, t_trial, ...
+    expDes.expMat(t_trial, :) = [NaN, NaN, const.runNum, t_trial, ...
         rand_var1, rand_var2, rand_rand1, rand_rand2, NaN, NaN, NaN, ...
         NaN, NaN, NaN];
     
@@ -112,7 +112,6 @@ for t_trial = 1:const.nb_trials
     % 12: 2nd-interval reaction time
     % 13: confidence response
     % 14: confidence reaction time
-    
 end
 
 % Parameters of Gabors for each Trials
@@ -147,16 +146,16 @@ for tt = 1:const.nb_trials
                 intended_global_dir(gg) = target_dir_lst_deg(intrvl);
             else
                 intended_global_dir(gg) = (randi([0, 4294967295])...
-                    ./ 4294967296)*360;
+                    ./ 4294967296) * 360;
             end
             angle_diff_deg = gab_ori - intended_global_dir(gg);
-            vect_len = cos(angle_diff_deg * (pi/180)); 
+            vect_len = cos(angle_diff_deg * (pi / 180)); 
             gabor_speed_inc(intrvl, gg) = const.gabor_speed_phadeg_frm ...
                 * vect_len;
         end
-        expDes.issignalS(tt,intrvl,:)=is_signal;
-        expDes.intended_global_dirS(tt,intrvl,:)=intended_global_dir;
+        expDes.issignalS(tt, intrvl, :) = is_signal;
+        expDes.intended_global_dirS(tt, intrvl, :) = intended_global_dir;
     end
-    expDes.gabor_speed_incS(tt,:,:)= gabor_speed_inc;
+    expDes.gabor_speed_incS(tt, :, :) = gabor_speed_inc;
 end
 end

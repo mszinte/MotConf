@@ -28,8 +28,6 @@ if const.expStart
     end
 end
 
-
-
 % Define session
 const.sesNum = input(sprintf('\n\tSession number: '));
 if const.sesNum > 9

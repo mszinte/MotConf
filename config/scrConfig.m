@@ -1,9 +1,9 @@
 function scr = scrConfig(const)
 % ----------------------------------------------------------------------
-% scr =scrConfig(const)
+% scr = scrConfig(const)
 % ----------------------------------------------------------------------
 % Goal of the function :
-% Define configuration relative to the screen
+% Define screen settings
 % ----------------------------------------------------------------------
 % Input(s) :
 % const : struct containing constant configurations
@@ -54,8 +54,6 @@ elseif const.comp == 3
     scr.distTop = 1210;
     scr.distBot = 1210;
 end
-
-
 scr.disp_sizeLeft = round(-scr.disp_sizeX/2);
 scr.disp_sizeRight = round(scr.disp_sizeX/2);
 scr.disp_sizeTop = round(scr.disp_sizeY/2);
@@ -68,7 +66,7 @@ scr.mid = [scr.x_mid,scr.y_mid];
 scr.clr_depth = Screen('PixelSize', scr.scr_num);
 
 % Frame rate (fps)
-scr.frame_duration = 1/(Screen('FrameRate',scr.scr_num));
+scr.frame_duration = 1/(Screen('FrameRate', scr.scr_num));
 if scr.frame_duration == inf
     scr.frame_duration = 1/const.desiredFD;
 elseif scr.frame_duration == 0
@@ -77,8 +75,8 @@ end
 
 % Frame rate (hertz)
 scr.hz = 1/(scr.frame_duration);
-if (scr.hz >= 1.1*const.desiredFD || scr.hz <= 0.9*const.desiredFD) ...
-        && const.expStart && ~strcmp(const.sjct,'DEMO')
+if (scr.hz >= 1.1 * const.desiredFD || scr.hz <= 0.9 * const.desiredFD) ...
+        && const.expStart
     error('Restart the program and change the refresh rate to %i Hz',...
         const.desiredFD);
 end

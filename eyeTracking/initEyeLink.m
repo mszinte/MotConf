@@ -37,14 +37,14 @@ eyetrack.txtCol = 15;
 eyetrack.bgCol = 0;
 
 % Change button to use the button box in the scanner
-eyetrack.uparrow = KbName('UpArrow');                   % Pupil threshold increase
-eyetrack.downarrow = KbName('DownArrow');               % Pupil threshold decrease
-eyetrack.tkey = KbName('LeftArrow');                    % Toggle Threshold coloring on or off
-eyetrack.rightarrow = KbName('RightArrow');             % Seyetrackect eye, global or zoomed view for link
-eyetrack.pluskey = KbName('=+');                        % Corneal reflection threshold increase
-eyetrack.minuskey = KbName('-_');                       % Corneal reflection threshold decrease
-eyetrack.returnkey = KbName('return');                  % Show camera image
-eyetrack.qkey = KbName('q');                            % Toggle Ellipse and Centroid pupil center position algorithm
+eyetrack.uparrow = KbName('UpArrow');                                       % Pupil threshold increase
+eyetrack.downarrow = KbName('DownArrow');                                   % Pupil threshold decrease
+eyetrack.tkey = KbName('LeftArrow');                                        % Toggle Threshold coloring on or off
+eyetrack.rightarrow = KbName('RightArrow');                                 % Seyetrackect eye, global or zoomed view for link
+eyetrack.pluskey = KbName('=+');                                            % Corneal reflection threshold increase
+eyetrack.minuskey = KbName('-_');                                           % Corneal reflection threshold decrease
+eyetrack.returnkey = KbName('return');                                      % Show camera image
+eyetrack.qkey = KbName('q');                                                % Toggle Ellipse and Centroid pupil center position algorithm
 EyelinkUpdateDefaults(eyetrack);
 
 % Initialization of the connection with the Eyeyetrackink Gazetracker.
@@ -79,8 +79,11 @@ Eyelink('command', 'link_event_filter = LEFT,RIGHT,FIXATION,FIXUPDATE,SACCADE,BL
 Eyelink('command', 'link_sample_data  = GAZE,GAZERES,AREA,HREF,VELOCITY,FIXAVG,STATUS');
 
 % Screen settings
-Eyelink('command','screen_pixel_coords = %d %d %d %d', 0, 0, scr.scr_sizeX-1, scr.scr_sizeY-1);
-Eyelink('command','screen_phys_coords = %d %d %d %d',scr.disp_sizeLeft,scr.disp_sizeTop,scr.disp_sizeRight,scr.disp_sizeBot);
+Eyelink('command','screen_pixel_coords = %d %d %d %d', 0, 0, ...
+    scr.scr_sizeX-1, scr.scr_sizeY-1);
+Eyelink('command','screen_phys_coords = %d %d %d %d', ...
+    scr.disp_sizeLeft, scr.disp_sizeTop, scr.disp_sizeRight, ...
+    scr.disp_sizeBot);
 Eyelink('command','screen_distance = %d %d', scr.distTop, scr.distBot);
 Eyelink('command','simulation_screen_distance = %d', scr.dist*10);
 
