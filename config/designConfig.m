@@ -18,7 +18,7 @@ function expDes = designConfig(const)
 % Experimental random variables
 % Var 1: signal probability of first interval
 if const.mkVideo
-    expDes.oneV = input(sprintf('\n\tVAR 1 : '));
+    expDes.oneV = input(sprintf('\n\tVAR 1: '));
     expDes.nb_var1 = 1;
 else
     expDes.oneV = (1:length(const.prob_signal_lst))';
@@ -31,7 +31,7 @@ end
 
 % Var 2: signal probability of second interval
 if const.mkVideo
-    expDes.twoV = input(sprintf('\n\tVAR 2 : '));
+    expDes.twoV = input(sprintf('\n\tVAR 2: '));
     expDes.nb_var2 = 1;
 else
     expDes.twoV = (1:length(const.prob_signal_lst))';
@@ -43,7 +43,7 @@ end
 
 % Rand 1: signal direction of first interval
 if const.mkVideo
-    expDes.oneR = input(sprintf('\n\tRAND 1 : '));
+    expDes.oneR = input(sprintf('\n\tRAND 1: '));
     expDes.nb_rand1 = 1;
 else
     expDes.oneR = (1:length(const.direction_dva_lst))';
@@ -56,7 +56,7 @@ end
 
 % Rand 2: signal direction of second interval
 if const.mkVideo
-    expDes.twoR = input(sprintf('\n\tRAND 2 : '));
+    expDes.twoR = input(sprintf('\n\tRAND 2: '));
     expDes.nb_rand2 = 1;
 else
     expDes.twoR = (1:length(const.direction_dva_lst))';

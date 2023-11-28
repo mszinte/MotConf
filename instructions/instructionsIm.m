@@ -9,7 +9,7 @@ function instructionsIm(scr, const, my_key, nameImage, exitFlag)
 % scr : main window pointer.
 % const : struct containing all the constant configurations.
 % nameImage : name of the file image to display
-% exitFlag : if = 1 (quit after 5sec)
+% exitFlag : if = 1 (quit after 3 sec)
 % ----------------------------------------------------------------------
 % Output(s):
 % (none)
@@ -71,6 +71,6 @@ while ~push_button
     end
 end
 
-Screen('Close',t_handle);
+Screen('Close', t_handle);
 
 end

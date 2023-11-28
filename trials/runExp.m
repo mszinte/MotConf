@@ -43,6 +43,8 @@ config.scr  = scr;
 config.const = const;
 config.expDes = expDes;
 config.my_key = my_key;
+config.eyetrack = eyetrack;
+config.aud = aud;
 save(const.mat_file,'config');
 
 % First mouse config
@@ -106,7 +108,7 @@ if const.tracker
         'TASK INSTRUCTIONS - PRESS SPACE')
 end
 instructionsIm(scr, const, my_key, ...
-    sprintf('%s%s',const.task,scanTxt), 0);
+    sprintf('%s%s', const.task, scanTxt), 0);
 for keyb = 1:size(my_key.keyboard_idx, 2)
     KbQueueFlush(my_key.keyboard_idx(keyb));
 end
@@ -114,7 +116,7 @@ fprintf(1,'\n\n\tBUTTON PRESSED BY SUBJECT\n');
 
 % Write on eyetracking screen
 if const.tracker
-    drawTrialInfoEL(scr,const)
+    drawTrialInfoEL(scr, const)
 end
 
 % Create gabor
@@ -180,10 +182,13 @@ else
 end
 
 % Save all config at the end of the block (overwrite start made at start)
-config.scr = scr; config.const = const; config.expDes = expDes;...
+config.scr = scr; 
+config.const = const; 
+config.expDes = expDes;...
 config.my_key = my_key;
+config.eyetrack = eyetrack;
+config.aud = aud;
 save(const.mat_file,'config');
-
 
 % Stop Eyetracking
 if const.tracker

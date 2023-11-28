@@ -62,12 +62,11 @@ bgCol = 0;
 % Clear screen
 eyeLinkClearScreen(bgCol);
 
-
-%% Draw Stimulus
+% Draw Stimulus
 % Fixation box in screen center
-rect_ctr = [scr.x_mid,scr.y_mid];
-eyeLinkDrawBox(rect_ctr(1), rect_ctr(2), const.fix_out_rim_rad*2, ...
-    const.fix_out_rim_rad*2, 2, frameCol, ftCol);
+rect_ctr = [scr.x_mid, scr.y_mid];
+eyeLinkDrawBox(rect_ctr(1), rect_ctr(2), const.fix_out_rim_rad * 2, ...
+    const.fix_out_rim_rad * 2, 2, frameCol, ftCol);
 
 WaitSecs(0.1);
 
