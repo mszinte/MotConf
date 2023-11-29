@@ -21,6 +21,12 @@ for keyb = 1:size(my_key.keyboard_idx, 2)
     KbQueueFlush(my_key.keyboard_idx(keyb));
 end
 
+% End sound
+if const.training
+    PsychPortAudio('Close');
+end
+
+
 % Close video file
 if const.mkVideo
     close(const.vid_obj);
@@ -70,5 +76,6 @@ Screen('CloseAll');
 % Print block duration
 timeDur=toc/60;
 fprintf(1,'\n\tThe run took : %2.0f min.\n\n', timeDur);
+
 
 end
