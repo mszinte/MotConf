@@ -73,6 +73,7 @@ end
 
 % training
 if const.training
-    const.sjct = sprintf('%st',const.sjct);
+    const.task = sprintf('%s_training',const.task);
 end
+
 end
