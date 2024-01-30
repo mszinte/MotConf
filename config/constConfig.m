@@ -123,6 +123,11 @@ texrect = [0, 0, const.im_wdth, const.im_hght];                             % Si
 % windmill
 anglesWINDstart1 = -135:90:135;
 anglesWINDstart2 = -180:90:90;
+leftarcAngleMin=5;
+totalarcAngleMin=35;
+
+anglesWINDstart1 = anglesWINDstart1+leftarcAngleMin;
+anglesWINDstart2 = anglesWINDstart2+leftarcAngleMin;
                                 
 const.dstRects = NaN(4, const.ngabors);
 const.dstRects1 = NaN(4, const.ngabors);
@@ -144,25 +149,25 @@ for rr = 1:const.stim_nb_rows
             % generate the windmill patterns
             anglPoint = atan2d((ypos - scr.y_mid), ((xpos - scr.x_mid)));
             anglPoint=round(anglPoint.*10.^5)./10.^5;
-            if and(anglPoint > anglesWINDstart1(1),anglPoint < anglesWINDstart1(1)+45)
+            if and(anglPoint > anglesWINDstart1(1),anglPoint < anglesWINDstart1(1)+totalarcAngleMin)
                 const.dstRects1(:, gg) = CenterRectOnPoint(texrect, xpos, ypos)';
                 const.gabor_count = const.gabor_count + 1;
-            elseif  and(anglPoint > anglesWINDstart1(2),anglPoint < anglesWINDstart1(2)+45)
+            elseif  and(anglPoint > anglesWINDstart1(2),anglPoint < anglesWINDstart1(2)+totalarcAngleMin)
                 const.dstRects1(:, gg) = CenterRectOnPoint(texrect, xpos, ypos)';
                 const.gabor_count = const.gabor_count + 1;
-            elseif  and(anglPoint > anglesWINDstart1(3),anglPoint < anglesWINDstart1(3)+45)
+            elseif  and(anglPoint > anglesWINDstart1(3),anglPoint < anglesWINDstart1(3)+totalarcAngleMin)
                 const.dstRects1(:, gg) = CenterRectOnPoint(texrect, xpos, ypos)';
                 const.gabor_count = const.gabor_count + 1;
-            elseif  and(anglPoint > anglesWINDstart1(4),anglPoint < anglesWINDstart1(4)+45)
+            elseif  and(anglPoint > anglesWINDstart1(4),anglPoint < anglesWINDstart1(4)+totalarcAngleMin)
                 const.dstRects1(:, gg) = CenterRectOnPoint(texrect, xpos, ypos)';
                 const.gabor_count = const.gabor_count + 1;
-            elseif and(anglPoint > anglesWINDstart2(1),anglPoint < anglesWINDstart2(1)+45)
+            elseif and(anglPoint > anglesWINDstart2(1),anglPoint < anglesWINDstart2(1)+totalarcAngleMin)
                 const.dstRects2(:, gg) = CenterRectOnPoint(texrect, xpos, ypos)';
-            elseif  and(anglPoint > anglesWINDstart2(2),anglPoint < anglesWINDstart2(2)+45)
+            elseif  and(anglPoint > anglesWINDstart2(2),anglPoint < anglesWINDstart2(2)+totalarcAngleMin)
                 const.dstRects2(:, gg) = CenterRectOnPoint(texrect, xpos, ypos)';
-            elseif  and(anglPoint > anglesWINDstart2(3),anglPoint < anglesWINDstart2(3)+45)
+            elseif  and(anglPoint > anglesWINDstart2(3),anglPoint < anglesWINDstart2(3)+totalarcAngleMin)
                 const.dstRects2(:, gg) = CenterRectOnPoint(texrect, xpos, ypos)';
-            elseif  and(anglPoint > anglesWINDstart2(4),anglPoint < anglesWINDstart2(4)+45)
+            elseif  and(anglPoint > anglesWINDstart2(4),anglPoint < anglesWINDstart2(4)+totalarcAngleMin)
                 const.dstRects2(:, gg) = CenterRectOnPoint(texrect, xpos, ypos)';
             end
         end
