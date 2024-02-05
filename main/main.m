@@ -37,12 +37,10 @@ const = constConfig(scr, const);
 expDes = designConfig(const);
 
 % Open screen window
-PsychImaging('PrepareConfiguration');
-PsychImaging('AddTask', 'General', 'FloatingPoint32BitIfPossible');
-PsychImaging('AddTask', 'General', 'NormalizedHighresColorRange');
-[scr.main, scr.rect] = PsychImaging('OpenWindow', scr.scr_num, ...
-    const.background_color);
-Screen('BlendFunction', scr.main, GL_ONE, GL_ONE);
+% Open screen window
+[scr.main, scr.rect] = Screen('OpenWindow', scr.scr_num, ...
+    const.background_color, [], scr.clr_depth, 2);
+Screen('BlendFunction', scr.main, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 Priority(MaxPriority(scr.main));
 
 % Open sound pointer
