@@ -68,6 +68,6 @@ const = runExp(scr, const, expDes, my_key, eyetrack, aud);
 overDone(const, my_key);
 
 % Compute and display feedback
-exp_feedback(expDes);
+exp_feedback(expDes)
 
 end
