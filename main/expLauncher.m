@@ -12,7 +12,6 @@
 
 % TODO (martin)
 % -------------
-% - check outputs overall in room
 % - Check screen settings in 3T room
 % - Check daq replacement statements and button box in 3T room
 
