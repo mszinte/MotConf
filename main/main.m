@@ -63,7 +63,7 @@ else
 end
 
 % Trial runner
-const = runExp(scr, const, expDes, my_key, eyetrack, aud);
+[const,expDes] = runExp(scr, const, expDes, my_key, eyetrack, aud);
 
 % End
 overDone(const, my_key);

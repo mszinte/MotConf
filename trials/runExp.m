@@ -1,6 +1,6 @@
-function const = runExp(scr, const, expDes, my_key, eyetrack, aud)
+function [const, expDes] = runExp(scr, const, expDes, my_key, eyetrack, aud)
 % ----------------------------------------------------------------------
-% const = runExp(scr, const, expDes, my_key, eyetrack, aud)
+% [const, expDes] = runExp(scr, const, expDes, my_key, eyetrack, aud)
 % ----------------------------------------------------------------------
 % Goal of the function :
 % Launch experiement instructions and connection with eyetracking.
@@ -15,6 +15,7 @@ function const = runExp(scr, const, expDes, my_key, eyetrack, aud)
 % ----------------------------------------------------------------------
 % Output(s):
 % const : struct containing constant configurations
+% expDes : struct containg experimental design
 % ----------------------------------------------------------------------
 % Function created by Martin SZINTE (martin.szinte@gmail.com)
 % ----------------------------------------------------------------------
@@ -134,7 +135,7 @@ head_txt = {'onset', 'duration', 'run_number', 'trial_number', ...
     '1st_interval_prob', '2nd_interval_prob', '1st_interval_dir', ...
     '2nd_interval_dir', '1st_interval_resp', '1st_interval_rt', ...
     '2nd_interval_resp', '2nd_interval_rt', 'confidence_resp', ...
-    'confidence_rt'};
+    'confidence_rt', '1st_interval_fix_break', '2nd_interval_fix_break'};
 
 for head_num = 1:length(head_txt)
     behav_txt_head{head_num} = head_txt{head_num};

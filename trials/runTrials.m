@@ -156,7 +156,7 @@ while nbf <= trial_offset
         
         % Check eye position
         if const.tracker
-            if sqrt((x_eye^2 + y_eye^2)) >= eyetrack.fix_rad
+            if sqrt(((x_eye - scr.x_mid)^2 + (y_eye - scr.y_mid)^2)) >= eyetrack.fix_rad
                 fix_break_int1 = 1;
             end
         end
@@ -182,7 +182,7 @@ while nbf <= trial_offset
         
         % Check eye position
         if const.tracker
-            if sqrt((x_eye^2 + y_eye^2)) >= eyetrack.fix_rad
+            if sqrt(((x_eye - scr.x_mid)^2 + (y_eye - scr.y_mid)^2)) >= eyetrack.fix_rad
                 fix_break_int2 = 1;
             end
         end
@@ -271,12 +271,7 @@ while nbf <= trial_offset
         if const.tracker; Eyelink('message','%s',log_txt); end
         
         % Deal with response
-        if keyCode(my_key.mri_tr) 
-            % MRI triggers
-            log_txt = sprintf('trial %i mri_trigger val = %i',t, ...
-                mri_band_val);
-            if const.tracker; Eyelink('message','%s',log_txt); end
-        elseif keyCode(my_key.escape) 
+        if keyCode(my_key.escape) 
             % Escape button
             if const.expStart == 0; overDone(const, my_key);end
         elseif keyCode(my_key.left1) 
