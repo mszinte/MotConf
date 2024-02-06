@@ -136,6 +136,21 @@ while nbf <= trial_offset
     % Flip count
     nbf = nbf + 1;
     
+    if Eyelink('NewFloatSampleAvailable') > 0
+        evt = Eyelink('NewestFloatSample');
+        if eye_used ~= -1 % do we know which eye to use yet?
+            % if we do, get current gaze position from sample
+            x = evt.gx(eye_used+1); % +1 as we're accessing MATLAB array
+            y = evt.gy(eye_used+1);
+            % do we have valid data and is the pupil visible?
+            if x~=el.MISSING_DATA && y~=el.MISSING_DATA && evt.pa(eye_used+1)>0
+
+                mx=x;
+                my=y;
+            end
+        end
+    end
+    
     % Draw background
     Screen('FillRect', scr.main, const.background_color );
     
@@ -238,9 +253,17 @@ while nbf <= trial_offset
             mri_band_val = input_return(my_key.idx_mri_bands);
         end
     end
-
+    
     % Deal with responses
     if keyPressed
+        % Save key press in log
+        key_name = KbName(keyCode);
+        key_code = keyCode;
+        log_txt = sprintf('trial %i event %s code %i', t, ...
+            key_name, key_code);
+        if const.tracker; Eyelink('message','%s',log_txt); end
+        
+        % Deal with response
         if keyCode(my_key.mri_tr) 
             % MRI triggers
             log_txt = sprintf('trial %i mri_trigger val = %i',t, ...
@@ -267,11 +290,6 @@ while nbf <= trial_offset
                 expDes.expMat(t, 11) = resp_val_int2;
                 expDes.expMat(t, 12) = GetSecs - int2_resp_vbl_on;
                 resp_int2 = 1;
-            else
-                log_txt = sprintf('trial %i int2_signal event %s', t, ...
-                    my_key.left1Val);
-                if const.tracker; Eyelink('message','%s',log_txt); end
-                
             end
         elseif keyCode(my_key.left3) 
             % Down-left button (225 deg motion)
@@ -352,13 +370,6 @@ while nbf <= trial_offset
                 expDes.expMat(t, 14) = GetSecs - conf_resp_vbl_on;
                 resp_conf = 1;
             end
-        else
-            % Save any wrong button press
-            key_name = KbName(keyCode);
-            key_code = keyCode;
-            log_txt = sprintf('trial %i event %s code %i', t, ...
-                key_name, key_code);
-            if const.tracker; Eyelink('message','%s',log_txt); end
         end
     end
     

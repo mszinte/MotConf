@@ -1,6 +1,6 @@
 function const = runExp(scr, const, expDes, my_key, eyetrack, aud)
 % ----------------------------------------------------------------------
-% const = runExp(scr, const, expDes, my_key, eyetrack)
+% const = runExp(scr, const, expDes, my_key, eyetrack, aud)
 % ----------------------------------------------------------------------
 % Goal of the function :
 % Launch experiement instructions and connection with eyetracking.
@@ -126,7 +126,7 @@ const.gabortex = CreateProceduralGabor(scr.main, round(const.im_wdth), ...
 % Main trial loop
 for trial = 1:const.nb_trials
     expDes.trial = trial;
-    expDes = runTrials(scr, const, expDes, my_key, aud);
+    expDes = runTrials(scr, const, expDes, my_key, eyetrack, aud);
 end
 
 % Compute/Write mean/std behavioral data

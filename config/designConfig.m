@@ -96,7 +96,7 @@ for t_trial = 1:const.nb_trials
     
     expDes.expMat(t_trial, :) = [NaN, NaN, const.runNum, t_trial, ...
         rand_var1, rand_var2, rand_rand1, rand_rand2, NaN, NaN, NaN, ...
-        NaN, NaN, NaN];
+        NaN, NaN, NaN, NaN, NaN];
     
     % 01: trial onset
     % 02: trial duration
@@ -112,6 +112,8 @@ for t_trial = 1:const.nb_trials
     % 12: 2nd-interval reaction time
     % 13: confidence response
     % 14: confidence reaction time
+    % 15: 1st-interval fixation break
+    % 16: 2nd-interval fixation break
 end
 
 % Parameters of Gabors for each Trials

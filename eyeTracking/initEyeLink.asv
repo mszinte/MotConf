@@ -35,9 +35,6 @@ eyetrack.fixation_rim_color = -(const.fixation_color-const.background_color);
 eyetrack.fixation_color = const.fixation_color-const.background_color;
 eyetrack.txtCol = 15;
 eyetrack.bgCol = 0;
-eyetrack.recEye = 2;
-eyetrack.fix_radVal = 2;
-eyetrack.fix_rad = vaDeg2pix(eyetrack.fix_radVal, scr);
 
 % Change button to use the button box in the scanner
 eyetrack.uparrow = KbName('UpArrow');                                       % Pupil threshold increase
@@ -124,5 +121,8 @@ if Eyelink('IsConnected')~=1
     Screen('CloseAll');
     return;
 end
+
+% 
+el.recEye = 2;
 
 end

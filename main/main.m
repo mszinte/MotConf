@@ -37,7 +37,6 @@ const = constConfig(scr, const);
 expDes = designConfig(const);
 
 % Open screen window
-% Open screen window
 [scr.main, scr.rect] = Screen('OpenWindow', scr.scr_num, ...
     const.background_color, [], scr.clr_depth, 2);
 Screen('BlendFunction', scr.main, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

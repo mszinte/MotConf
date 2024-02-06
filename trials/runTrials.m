@@ -1,6 +1,6 @@
-function expDes = runTrials(scr, const, expDes, my_key, aud)
+function expDes = runTrials(scr, const, expDes, my_key, eyetrack, aud)
 % ----------------------------------------------------------------------
-% expDes = runTrials(scr, const, expDes, my_key, aud)
+% expDes = runTrials(scr, const, expDes, my_key, eyetrack, aud)
 % ----------------------------------------------------------------------
 % Goal of the function :
 % Draw stimuli of each indivual trial and waiting for inputs
@@ -10,6 +10,7 @@ function expDes = runTrials(scr, const, expDes, my_key, aud)
 % const : struct containing constant configurations
 % expDes : struct containg experimental design
 % my_key : structure containing keyboard configurations
+% eyetrack : structure containing eyetracking configurations
 % aud : structure containing audio configurations
 % ----------------------------------------------------------------------
 % Output(s):
@@ -131,10 +132,18 @@ resp_int2 = 0;
 resp_conf = 0;
 feedback_int1 = 0;
 feedback_int2 = 0;
+fix_break_int1 = 0;
+fix_break_int2 = 0;
+
 while nbf <= trial_offset
     
     % Flip count
     nbf = nbf + 1;
+    
+    % Get eyetracker gaze coordinates
+    if const.tracker
+        [x_eye, y_eye] = getCoord(eyetrack);
+    end
     
     % Draw background
     Screen('FillRect', scr.main, const.background_color );
@@ -143,8 +152,14 @@ while nbf <= trial_offset
     if nbf >= int1_signal_nbf_on && nbf <= int1_signal_nbf_off
         drawBullsEye(scr, const, scr.x_mid, scr.y_mid, 'int1');
         mot_int1_nbf = mot_int1_nbf + 1;
-        
         expDes = drawGlobalMotion(scr, const, expDes, 1, mot_int1_nbf);
+        
+        % Check eye position
+        if const.tracker
+            if sqrt((x_eye^2 + y_eye^2)) >= eyetrack.fix_rad
+                fix_break_int1 = 1;
+            end
+        end
     end
     
     % Interval 1: motion direction judgment
@@ -164,6 +179,13 @@ while nbf <= trial_offset
         drawBullsEye(scr, const, scr.x_mid, scr.y_mid, 'int1');
         mot_int2_nbf = mot_int2_nbf + 1;
         expDes = drawGlobalMotion(scr, const, expDes, 2, mot_int2_nbf);
+        
+        % Check eye position
+        if const.tracker
+            if sqrt((x_eye^2 + y_eye^2)) >= eyetrack.fix_rad
+                fix_break_int2 = 1;
+            end
+        end
     end
     
     % Interval 2: motion direction judgment
@@ -438,5 +460,10 @@ if resp_conf == 0
     expDes.expMat(t, 14) = 0;
 end
 
-    
+% Gaze position
+if const.tracker
+    expDes.expMat(t, 15) = fix_break_int1;
+    expDes.expMat(t, 16) = fix_break_int2;
+end
+
 end
