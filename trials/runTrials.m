@@ -263,12 +263,6 @@ while nbf <= trial_offset
     
     % Deal with responses
     if keyPressed
-        % Save key press in log
-        key_name = KbName(keyCode);
-        key_code = keyCode;
-        log_txt = sprintf('trial %i event %s code %i', t, ...
-            key_name, key_code);
-        if const.tracker; Eyelink('message','%s',log_txt); end
         
         % Deal with response
         if keyCode(my_key.escape) 
@@ -372,6 +366,13 @@ while nbf <= trial_offset
                 expDes.expMat(t, 14) = GetSecs - conf_resp_vbl_on;
                 resp_conf = 1;
             end
+        else
+            % Save key press in log
+            key_name = KbName(keyCode);
+            key_code = find(keyCode~=0);
+            log_txt = sprintf('trial %i event %s code %i', t, ...
+                key_name, key_code);
+            if const.tracker; Eyelink('message','%s',log_txt); end
         end
     end
     
