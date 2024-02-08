@@ -112,7 +112,7 @@ if const.mkVideo
     const.nb_repeat = 1;                                                    % Trial repetition in video mode
     const.nb_trials = 1;                                                    % Number of trials in video mode
 else
-    const.nb_repeat = 1;%4;                                                    % Trial repetition
+    const.nb_repeat = 4;                                                    % Trial repetition
     const.nb_trials = const.nb_repeat * length(const.prob_signal_lst) * ... % Number of trials
         length(const.prob_signal_lst);
 end

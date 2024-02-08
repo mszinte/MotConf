@@ -35,7 +35,7 @@ eyetrack.fixation_rim_color = -(const.fixation_color-const.background_color);
 eyetrack.fixation_color = const.fixation_color-const.background_color;
 eyetrack.txtCol = 15;
 eyetrack.bgCol = 0;
-eyetrack.recEye = 2;
+eyetrack.recEye = 1;
 eyetrack.fix_radVal = 2;
 eyetrack.fix_rad = vaDeg2pix(eyetrack.fix_radVal, scr);
 

@@ -25,10 +25,10 @@ ratio_miss_resp_int2 = num_miss_resp_int2 / num_trials;
 num_miss_resp_conf = sum(round(expDes.expMat(:,13))==0);
 ratio_miss_resp_conf = num_miss_resp_conf / num_trials;
 
-num_fix_break_int1 = sum(round(expDes.expMat(:,15))==0);
+num_fix_break_int1 = sum(round(expDes.expMat(:,15))==1);
 ratio_fix_break_int1  = num_fix_break_int1 / num_trials;
 
-num_fix_break_int2 = sum(round(expDes.expMat(:,16))==0);
+num_fix_break_int2 = sum(round(expDes.expMat(:,16))==1);
 ratio_fix_break_int2  = num_fix_break_int2 / num_trials;
 
 % Button press feedback

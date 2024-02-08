@@ -55,8 +55,13 @@ else
     const.modality = 'beh';
 end
 
+
+
 % Define task
 const.task = const.expName;
+if const.training
+    const.task = sprintf('%s_training',const.task);
+end
 fprintf(1,'\n\tTask: %s\n',const.task);
 
 % Define recording eye
@@ -69,11 +74,6 @@ if ~const.expStart
     const.run = 'run-0X';
     const.modality = 'beh';
     const.recEye = 1;
-end
-
-% training
-if const.training
-    const.task = sprintf('%s_training',const.task);
 end
 
 end
