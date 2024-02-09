@@ -30,7 +30,7 @@ const.tracker = 1;              % run with eye tracker (0 = NO, 1 = YES)
 const.comp = 3;                 % run in which computer (1 = MRI; 2 = Can laptop; 3 = Diplay++)
 const.scanner = 0;              % run in MRI scanner (0 = NO, 1 = YES)
 const.scannerTest = 0;          % fake scanner trigger (0 = NO, 1 = YES)
-const.training = 1;             % training session (0 = NO, 1 = YES)
+const.training = 0;             % training session (0 = NO, 1 = YES)
 const.run_total = 5;            % number of run in total
 
 % Desired screen setting
