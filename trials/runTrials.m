@@ -78,7 +78,7 @@ if t == 1
     Screen('Flip',scr.main);
     
     first_trigger = 0;
-    expDes.mri_band_val = my_key.first_val(3);
+    expDes.mri_band_val = my_key.first_val(end);
     while ~first_trigger
         if const.scanner == 0 || const.scannerTest
             first_trigger = 1;
