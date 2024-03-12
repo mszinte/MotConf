@@ -22,8 +22,8 @@ aud.master_nChannels = 2;                               % number of audio channe
 
 aud.master_rep = 0;                                     % repetition of the sound data
 aud.master_when = 0;                                    % time the device should start
-aud.master_waitforstart = 1;                            % wait until device has really started
-aud.master_globalVol = 0.05;                            % volume 
+aud.master_waitforstart = 0;                            % wait until device has really started
+aud.master_globalVol = 0.3;                            % volume 
 
 % Slaves
 aud.slaveStim_mode = 1;                                 % mode of operation (1 = sound playback only)

@@ -46,14 +46,18 @@ Screen('BlendFunction', scr.main, GL_ONE, GL_ONE);
 
 % Open sound pointer
 if const.training
+    % Open sound pointer
     aud.master_main = PsychPortAudio('Open', [], aud.master_mode,...
-        aud.master_reqlatclass, aud.master_rate, aud.master_nChannels);
+        aud.master_reqlatclass, [], aud.master_nChannels);
     PsychPortAudio('Start', aud.master_main, aud.master_rep, ...
         aud.master_when, aud.master_waitforstart);
     PsychPortAudio('Volume', aud.master_main, aud.master_globalVol);
     aud.stim_handle = PsychPortAudio('OpenSlave', aud.master_main, ...
         aud.slaveStim_mode);
+    
 end
+
+
 
 % Initialize eye tracker
 if const.tracker

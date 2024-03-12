@@ -107,6 +107,7 @@ if t == 1
                     overDone(const, my_key)
                 elseif keyCode(my_key.mri_tr)
                     first_trigger = 1;
+                    mri_band_val = -8;
                 end
             end
         end
