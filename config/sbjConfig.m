@@ -60,7 +60,7 @@ end
 % Define task
 const.task = const.expName;
 if const.training
-    const.task = sprintf('%s_training',const.task);
+    const.task = sprintf('%sTraining',const.task);
 end
 fprintf(1,'\n\tTask: %s\n',const.task);
 
