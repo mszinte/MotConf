@@ -212,7 +212,42 @@ while nbf <= trial_offset
     if nbf >= conf_iti_nbf_on && nbf <= conf_iti_nbf_off
         drawBullsEye(scr, const, scr.x_mid, scr.y_mid, 'conf');
     end
-
+    
+    % flip screen
+    vbl = Screen('Flip',scr.main);
+    
+    
+    % Save trials times
+    if nbf == int1_signal_nbf_on 
+        trial_on = vbl;
+        log_txt = sprintf('int1_signal %i onset at %f', t, vbl);
+        if const.tracker; Eyelink('message','%s',log_txt); end
+    elseif nbf == int1_resp_nbf_on
+        int1_resp_vbl_on = vbl;
+        log_txt = sprintf('int1_resp %i offset at %f', t, vbl);
+        if const.tracker; Eyelink('message','%s',log_txt); end
+    elseif nbf == int1_iti_on
+        log_txt = sprintf('int1_iti_on %i onset at %f', t, vbl);
+        if const.tracker; Eyelink('message','%s',log_txt); end
+    elseif nbf == int2_signal_nbf_on 
+        log_txt = sprintf('int2_signal %i onset at %f', t, vbl);
+        if const.tracker; Eyelink('message','%s',log_txt); end
+    elseif nbf == int2_resp_nbf_on
+        int2_resp_vbl_on = vbl;
+        log_txt = sprintf('int2_resp %i offset at %f', t, vbl);
+        if const.tracker; Eyelink('message','%s',log_txt); end
+    elseif nbf == int2_iti_on
+        log_txt = sprintf('int2_iti_on %i onset at %f', t, vbl);
+        if const.tracker; Eyelink('message','%s',log_txt); end
+    elseif nbf == conf_resp_nbf_on
+        conf_resp_vbl_on = vbl;
+        log_txt = sprintf('conf_resp %i offset at %f', t, vbl);
+        if const.tracker; Eyelink('message','%s',log_txt); end
+    elseif nbf == conf_iti_nbf_on
+        log_txt = sprintf('iti %i onset at %f', t, vbl);
+        if const.tracker; Eyelink('message','%s',log_txt); end
+    end
+    
     % Check keyboard
     keyPressed = 0;
     keyCode = zeros(1,my_key.keyCodeNum);
@@ -223,8 +258,7 @@ while nbf <= trial_offset
     end
 
     if const.scanner == 1 && ~const.scannerTest
-        input_return = [my_key.ni_session2.inputSingleScan, ...
-            my_key.ni_session1.inputSingleScan];
+        input_return = [my_key.ni_session2.inputSingleScan, my_key.ni_session1.inputSingleScan];
         
         % button press trigger
         if input_return(my_key.idx_button_left1) == ...
@@ -270,6 +304,7 @@ while nbf <= trial_offset
             % Escape button
             if const.expStart == 0; overDone(const, my_key);end
         elseif keyCode(my_key.left1) 
+            fprintf(1,'left1\n');
             % Up-left button (135 deg motion)
             if time2resp_int1 && resp_int1 == 0
                 log_txt = sprintf('trial %i int1_signal event %s', t,...
@@ -289,6 +324,7 @@ while nbf <= trial_offset
                 resp_int2 = 1;
             end
         elseif keyCode(my_key.left3) 
+            fprintf(1,'left3\n');
             % Down-left button (225 deg motion)
             if time2resp_int1 && resp_int1 == 0
                 log_txt = sprintf('trial %i int1_signal event %s', t, ...
@@ -308,6 +344,7 @@ while nbf <= trial_offset
                 resp_int2 = 1;
             end
         elseif keyCode(my_key.left2)
+            fprintf(1,'left2\n');
             % Middle-left button (1st interval confidence)
             if time2resp_conf && resp_conf == 0
                 log_txt = sprintf('trial %i conf event %s', t, ...
@@ -389,9 +426,6 @@ while nbf <= trial_offset
         end
     end
     
-    % flip screen
-    vbl = Screen('Flip',scr.main);
-    
     % Create movie
     if const.mkVideo
         expDes.vid_num = expDes.vid_num + 1;
@@ -401,36 +435,7 @@ while nbf <= trial_offset
         writeVideo(const.vid_obj,image_vid);
     end
         
-    % Save trials times
-    if nbf == int1_signal_nbf_on 
-        trial_on = vbl;
-        log_txt = sprintf('int1_signal %i onset at %f', t, vbl);
-        if const.tracker; Eyelink('message','%s',log_txt); end
-    elseif nbf == int1_resp_nbf_on
-        int1_resp_vbl_on = vbl;
-        log_txt = sprintf('int1_resp %i offset at %f', t, vbl);
-        if const.tracker; Eyelink('message','%s',log_txt); end
-    elseif nbf == int1_iti_on
-        log_txt = sprintf('int1_iti_on %i onset at %f', t, vbl);
-        if const.tracker; Eyelink('message','%s',log_txt); end
-    elseif nbf == int2_signal_nbf_on 
-        log_txt = sprintf('int2_signal %i onset at %f', t, vbl);
-        if const.tracker; Eyelink('message','%s',log_txt); end
-    elseif nbf == int2_resp_nbf_on
-        int2_resp_vbl_on = vbl;
-        log_txt = sprintf('int2_resp %i offset at %f', t, vbl);
-        if const.tracker; Eyelink('message','%s',log_txt); end
-    elseif nbf == int2_iti_on
-        log_txt = sprintf('int2_iti_on %i onset at %f', t, vbl);
-        if const.tracker; Eyelink('message','%s',log_txt); end
-    elseif nbf == conf_resp_nbf_on
-        conf_resp_vbl_on = vbl;
-        log_txt = sprintf('conf_resp %i offset at %f', t, vbl);
-        if const.tracker; Eyelink('message','%s',log_txt); end
-    elseif nbf == conf_iti_nbf_on
-        log_txt = sprintf('iti %i onset at %f', t, vbl);
-        if const.tracker; Eyelink('message','%s',log_txt); end
-    end
+    
 end
 
 expDes.expMat(t, 1) = trial_on;
