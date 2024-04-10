@@ -304,7 +304,6 @@ while nbf <= trial_offset
             % Escape button
             if const.expStart == 0; overDone(const, my_key);end
         elseif keyCode(my_key.left1) 
-            fprintf(1,'left1\n');
             % Up-left button (135 deg motion)
             if time2resp_int1 && resp_int1 == 0
                 log_txt = sprintf('trial %i int1_signal event %s', t,...
@@ -324,7 +323,6 @@ while nbf <= trial_offset
                 resp_int2 = 1;
             end
         elseif keyCode(my_key.left3) 
-            fprintf(1,'left3\n');
             % Down-left button (225 deg motion)
             if time2resp_int1 && resp_int1 == 0
                 log_txt = sprintf('trial %i int1_signal event %s', t, ...
@@ -344,7 +342,6 @@ while nbf <= trial_offset
                 resp_int2 = 1;
             end
         elseif keyCode(my_key.left2)
-            fprintf(1,'left2\n');
             % Middle-left button (1st interval confidence)
             if time2resp_conf && resp_conf == 0
                 log_txt = sprintf('trial %i conf event %s', t, ...
@@ -356,7 +353,6 @@ while nbf <= trial_offset
                 resp_conf = 1;
             end
         elseif keyCode(my_key.right1)
-            % Up-right button (45 deg motion)
             if time2resp_int1 && resp_int1 == 0
                 log_txt = sprintf('trial %i int1_signal event %s', t, ...
                     my_key.right1Val);
