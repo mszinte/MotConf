@@ -321,6 +321,10 @@ while nbf <= trial_offset
                 expDes.expMat(t, 11) = resp_val_int2;
                 expDes.expMat(t, 12) = GetSecs - int2_resp_vbl_on;
                 resp_int2 = 1;
+            else
+                log_txt = sprintf('trial %i incorrect_timing event %s', t, ...
+                    my_key.left1Val);
+                if const.tracker; Eyelink('message','%s',log_txt); end
             end
         elseif keyCode(my_key.left3) 
             % Down-left button (225 deg motion)
@@ -340,6 +344,10 @@ while nbf <= trial_offset
                 expDes.expMat(t, 11) = resp_val_int2;
                 expDes.expMat(t, 12) = GetSecs - int2_resp_vbl_on;
                 resp_int2 = 1;
+            else
+                log_txt = sprintf('trial %i incorrect_timing event %s', t, ...
+                    my_key.left3Val);
+                if const.tracker; Eyelink('message','%s',log_txt); end
             end
         elseif keyCode(my_key.left2)
             % Middle-left button (1st interval confidence)
@@ -351,6 +359,10 @@ while nbf <= trial_offset
                 expDes.expMat(t, 13) = resp_val_conf;
                 expDes.expMat(t, 14) = GetSecs - conf_resp_vbl_on;
                 resp_conf = 1;
+            else
+                log_txt = sprintf('trial %i incorrect_timing event %s', t, ...
+                    my_key.left2Val);
+                if const.tracker; Eyelink('message','%s',log_txt); end
             end
         elseif keyCode(my_key.right1)
             if time2resp_int1 && resp_int1 == 0
@@ -369,6 +381,10 @@ while nbf <= trial_offset
                 expDes.expMat(t, 11) = resp_val_int2;
                 expDes.expMat(t, 12) = GetSecs - int2_resp_vbl_on;
                 resp_int2 = 1;
+            else
+                log_txt = sprintf('trial %i incorrect_timing event %s', t, ...
+                    my_key.right1);
+                if const.tracker; Eyelink('message','%s',log_txt); end
             end
         elseif keyCode(my_key.right3)
             % Down-right button (315 deg motion)
@@ -388,6 +404,10 @@ while nbf <= trial_offset
                 expDes.expMat(t, 11) = resp_val_int2;
                 expDes.expMat(t, 12) = GetSecs - int2_resp_vbl_on;
                 resp_int2 = 1;
+            else
+                log_txt = sprintf('trial %i incorrect_timing event %s', t, ...
+                    my_key.right3);
+                if const.tracker; Eyelink('message','%s',log_txt); end
             end
         elseif keyCode(my_key.right2)
             % Middle-right button (2nd interval confidence)
@@ -399,6 +419,10 @@ while nbf <= trial_offset
                 expDes.expMat(t, 13) = resp_val_conf;
                 expDes.expMat(t, 14) = GetSecs - conf_resp_vbl_on;
                 resp_conf = 1;
+            else
+                log_txt = sprintf('trial %i incorrect_timing event %s', t, ...
+                    my_key.right2Val);
+                if const.tracker; Eyelink('message','%s',log_txt); end
             end
         else
             % Save key press in log
